@@ -1,0 +1,49 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install poetry
+        run: pipx install poetry==${{ vars.POETRY_VERSION }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          cache: "poetry"
+          python-version: ${{ matrix.python-version }}
+          cache-dependency-path: "pyproject.toml"
+
+      - name: Install invoke
+        run: pipx install invoke
+
+      - name: Install Dependencies
+        run: invoke install
+
+      # We run the `mypy` check here since it requires all of the packages to be installed.
+      # Doing that in the pre-commit step would be duplicative and spend more time in CI.
+      - name: Validate Types
+        run: invoke type-check
+
+      - name: Run Tests
+        run: invoke test
+
+      - name: Upload Test Coverage Reports
+        uses: codecov/codecov-action@v4.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

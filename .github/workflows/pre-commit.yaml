@@ -1,0 +1,10 @@
+name: Style Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  pre-commit:
+    uses: rungalileo/.github/.github/workflows/pre-commit.yaml@main
