@@ -1,5 +1,5 @@
 ##################
-🦸 Galileo Protect
+🛡️ Galileo Protect
 ##################
 
 Galileo Protect is the Python client to interact with `Galileo's GenAI Studio: Protect <https://www.rungalileo.io/>`_.
