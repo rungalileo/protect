@@ -8,7 +8,7 @@ from requests_mock import POST
 from galileo_protect.constants.routes import Routes
 from galileo_protect.invoke import invoke
 from galileo_protect.schemas import Payload, Rule, RuleOperator, Ruleset
-from galileo_protect.schemas.response import Response
+from galileo_protect.schemas.invoke import Response
 from tests.data import A_PROTECT_INPUT, A_STAGE_NAME
 
 
