@@ -323,13 +323,13 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "execnet"
-version = "2.1.0"
+version = "2.1.1"
 description = "execnet: rapid multi-Python deployment"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "execnet-2.1.0-py3-none-any.whl", hash = "sha256:ad174d7705410adc9359ba4822bad211d71cdbd59ff70304e1aa41d196b4b4d3"},
-    {file = "execnet-2.1.0.tar.gz", hash = "sha256:dc4a63f86afb40f8429f59f938d6cb97846f9e7cf7dd9eb4b8c26016965b7ac0"},
+    {file = "execnet-2.1.1-py3-none-any.whl", hash = "sha256:26dee51f1b80cebd6d0ca8e74dd8745419761d3bef34163928cbebbdc4749fdc"},
+    {file = "execnet-2.1.1.tar.gz", hash = "sha256:5189b52c6121c24feae288166ab41b32549c7e2348652736540b9e6e7d4e72e3"},
 ]
 
 [package.extras]
@@ -370,13 +370,13 @@ sphinx-basic-ng = "*"
 
 [[package]]
 name = "galileo-core"
-version = "0.9.3"
+version = "0.10.0"
 description = "Shared schemas and configuration for Galileo's Python packages."
 optional = false
 python-versions = "<3.13,>=3.8.1"
 files = [
-    {file = "galileo_core-0.9.3-py3-none-any.whl", hash = "sha256:995ce9f2b14f4146b16106547b3a15ee0ec4356f94896d498c5c9aa2a2ed5aa1"},
-    {file = "galileo_core-0.9.3.tar.gz", hash = "sha256:c6db40a54b06a708cbe99b999eb554d900c2692590be57042a98f68b4a82d036"},
+    {file = "galileo_core-0.10.0-py3-none-any.whl", hash = "sha256:5927dcaf5e7314e78f810a0cf0c8b5ce321eb08bb8023cfe2cc602e36b349c65"},
+    {file = "galileo_core-0.10.0.tar.gz", hash = "sha256:b65854a027e65cf11b4c698e0c1f5cbb6fdd714ef6adffc0e510af14b64b96c9"},
 ]
 
 [package.dependencies]
@@ -1504,4 +1504,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1,<3.13"
-content-hash = "bc6f60b427038278292c0facc95dbf64ff6c0cbf63ea0dbfa17613c426711b68"
+content-hash = "4aee9458438b4b8dc7da14ffa6df838a238b969b4cfb35ad4f2f351f94dc6bd4"
