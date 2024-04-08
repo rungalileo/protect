@@ -7,7 +7,7 @@ from requests import post
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
 from galileo_protect.schemas import Payload, Request, Ruleset
-from galileo_protect.schemas.response import Response
+from galileo_protect.schemas.invoke import Response
 
 
 def invoke(
