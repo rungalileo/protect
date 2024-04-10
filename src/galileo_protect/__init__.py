@@ -14,6 +14,6 @@ from galileo_protect.schemas import (
     Ruleset,
     Stage,
 )
-from galileo_protect.stage import create_stage
+from galileo_protect.stage import create_stage, pause_stage, resume_stage
 
 __version__ = "0.3.0"
