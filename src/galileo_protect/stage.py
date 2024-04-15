@@ -6,7 +6,7 @@ from requests import post, put
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
-from galileo_protect.schemas import Action, Stage
+from galileo_protect.schemas import Action, Stage, PassthroughAction
 from galileo_protect.schemas.stage import StageResponse
 
 
@@ -14,8 +14,8 @@ def create_stage(
     project_id: Optional[UUID4] = None,
     name: Optional[str] = None,
     description: Optional[str] = None,
-    action: Optional[Action] = None,
-    action_elabed: bool = False,
+    action: Action = PassthroughAction(),
+    action_enabled: bool = False,
     config: Optional[ProtectConfig] = None,
 ) -> StageResponse:
     config = config or ProtectConfig.get()
@@ -28,7 +28,7 @@ def create_stage(
             post,
             Routes.stages.format(project_id=project_id),
             json=Stage(
-                name=name, project_id=project_id, description=description, action=action, action_enabled=action_elabed
+                name=name, project_id=project_id, description=description, action=action, action_enabled=action_enabled
             ).model_dump(mode="json"),
         )
     )
