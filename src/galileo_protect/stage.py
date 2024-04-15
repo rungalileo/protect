@@ -6,7 +6,7 @@ from requests import post, put
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
-from galileo_protect.schemas import Action, Stage, PassthroughAction
+from galileo_protect.schemas import Action, PassthroughAction, Stage
 from galileo_protect.schemas.stage import StageResponse
 
 
