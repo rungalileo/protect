@@ -12,7 +12,7 @@ project = "galileo-protect"
 copyright = f"{datetime.now().year}, Galileo Technologies Inc."
 
 author = "Galileo Technologies Inc."
-release = "0.5.1"
+release = "0.5.2"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

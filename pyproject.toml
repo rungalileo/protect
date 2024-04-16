@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "galileo-protect"
-version = "0.5.1"
+version = "0.5.2"
 description = "🛡️ Secure your Generative AI applications with Galileo Protect!"
 authors = ["Galileo Technologies Inc. <team@rungalileo.io>"]
 readme = "README.md"
