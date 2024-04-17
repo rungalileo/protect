@@ -16,7 +16,7 @@ def invoke(
     project_id: Optional[UUID4] = None,
     stage_name: Optional[str] = None,
     stage_id: Optional[UUID4] = None,
-    timeout: float = timedelta(minutes=5).total_seconds(),
+    timeout: float = timedelta(seconds=10).total_seconds(),
     metadata: Optional[Dict[str, str]] = None,
     headers: Optional[Dict[str, str]] = None,
     config: Optional[ProtectConfig] = None,
