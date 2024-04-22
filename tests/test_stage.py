@@ -50,7 +50,7 @@ class TestCreate:
             name=name,
             description=description,
             action=action,
-            action_elabed=action_enabled,
+            action_enabled=action_enabled,
             config=config,
         )
         assert matcher.called
@@ -97,7 +97,7 @@ class TestCreate:
             name=name,
             description=description,
             action=action,
-            action_elabed=action_enabled,
+            action_enabled=action_enabled,
             config=config,
         )
         assert matcher.called
