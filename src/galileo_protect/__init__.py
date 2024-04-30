@@ -16,4 +16,4 @@ from galileo_protect.schemas import (
 )
 from galileo_protect.stage import create_stage, pause_stage, resume_stage
 
-__version__ = "0.5.2"
+__version__ = "0.6.0"
