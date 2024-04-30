@@ -37,3 +37,27 @@ def invoke(
         ).model_dump(mode="json"),
     )
     return Response.model_validate(response_json)
+
+
+async def ainvoke(
+    payload: Payload,
+    prioritized_rulesets: Optional[Sequence[Ruleset]] = None,
+    project_id: Optional[UUID4] = None,
+    stage_name: Optional[str] = None,
+    stage_id: Optional[UUID4] = None,
+    timeout: float = timedelta(seconds=10).total_seconds(),
+    metadata: Optional[Dict[str, str]] = None,
+    headers: Optional[Dict[str, str]] = None,
+    config: Optional[ProtectConfig] = None,
+) -> Response:
+    return invoke(
+        payload=payload,
+        prioritized_rulesets=prioritized_rulesets,
+        project_id=project_id,
+        stage_name=stage_name,
+        stage_id=stage_id,
+        timeout=timeout,
+        metadata=metadata,
+        headers=headers,
+        config=config,
+    )
