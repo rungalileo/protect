@@ -1,9 +1,9 @@
-from datetime import timedelta
 from typing import Dict, Optional, Sequence
 
 from pydantic import UUID4
 from requests import post
 
+from galileo_protect.constants.invoke import TIMEOUT
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
 from galileo_protect.schemas import Payload, Request, Ruleset
@@ -16,7 +16,7 @@ def invoke(
     project_id: Optional[UUID4] = None,
     stage_name: Optional[str] = None,
     stage_id: Optional[UUID4] = None,
-    timeout: float = timedelta(seconds=10).total_seconds(),
+    timeout: float = TIMEOUT,
     metadata: Optional[Dict[str, str]] = None,
     headers: Optional[Dict[str, str]] = None,
     config: Optional[ProtectConfig] = None,
@@ -45,7 +45,7 @@ async def ainvoke(
     project_id: Optional[UUID4] = None,
     stage_name: Optional[str] = None,
     stage_id: Optional[UUID4] = None,
-    timeout: float = timedelta(seconds=10).total_seconds(),
+    timeout: float = TIMEOUT,
     metadata: Optional[Dict[str, str]] = None,
     headers: Optional[Dict[str, str]] = None,
     config: Optional[ProtectConfig] = None,
