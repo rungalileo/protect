@@ -8,7 +8,7 @@ packages = [{include = "galileo_protect", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.8.1,<3.13"
-galileo-core = "^0.12.0"
+galileo-core = "^0.13.0"
 
 
 [tool.poetry.group.test.dependencies]
