@@ -1,22 +1,13 @@
-from typing import Callable, Generator, List
+from typing import Callable, List
 from unittest.mock import Mock
 from uuid import uuid4
 
-from pytest import fixture, mark
-from requests_mock import POST
+from pytest import mark
 
-from galileo_protect.constants.routes import Routes
 from galileo_protect.invoke import ainvoke, invoke
 from galileo_protect.schemas import Payload, Rule, RuleOperator, Ruleset
 from galileo_protect.schemas.invoke import Response
 from tests.data import A_PROTECT_INPUT, A_STAGE_NAME
-
-
-@fixture
-def mock_invoke(mock_request: Mock) -> Generator[None, None, None]:
-    matcher = mock_request(POST, Routes.invoke, json=Response(text=A_PROTECT_INPUT).model_dump())
-    yield matcher
-    assert matcher.called
 
 
 @mark.parametrize(

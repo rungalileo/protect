@@ -5,13 +5,15 @@ from typing import Callable, Generator, Optional, Union
 from unittest.mock import Mock, patch
 from uuid import UUID
 
-from galileo_core.constants.routes import Routes
+from galileo_core.constants.routes import Routes as CoreRoutes
 from pytest import MonkeyPatch, fixture
-from requests_mock import GET
+from requests_mock import GET, POST
 from requests_mock.adapter import _Matcher
 
+from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
-from tests.data import A_CONSOLE_URL, A_JWT_TOKEN
+from galileo_protect.schemas.invoke import Response
+from tests.data import A_CONSOLE_URL, A_JWT_TOKEN, A_PROTECT_INPUT
 
 
 @fixture
@@ -56,7 +58,7 @@ def mock_request(requests_mock: Mock) -> Callable:
 
 @fixture
 def mock_healthcheck(mock_request: Mock) -> Generator[None, None, None]:
-    matcher = mock_request(GET, Routes.healthcheck, json={})
+    matcher = mock_request(GET, CoreRoutes.healthcheck, json={})
     yield
     assert matcher.called
 
@@ -79,3 +81,12 @@ def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None) -> Callable
         return config
 
     return curry
+
+
+@fixture
+def mock_invoke(mock_request: Mock) -> Generator[None, None, None]:
+    matcher = mock_request(
+        POST, Routes.invoke, json=Response(text=A_PROTECT_INPUT, status="NOT_TRIGGERED").model_dump()
+    )
+    yield matcher
+    assert matcher.called
