@@ -17,8 +17,14 @@ class PayloadV1(BaseModelV1):
 
 
 class ProtectTool(BaseTool):
-    name: str = "galileo_pzrotect"
-    description: str = "Apply protections to the application with Galileo Protect."
+    name: str = "GalileoProtect"
+    description: str = (
+        "Protect your LLM applications from harmful content using Galileo Protect. "
+        "This tool is a wrapper around Galileo's Protect API, can be used to scan text "
+        "for harmful content, and can be used to trigger actions based on the results."
+        "The tool can be used synchronously or asynchronously, on the input text or output text,"
+        "and can be configured with a set of rulesets to evaluate on."
+    )
     args_schema: Type[BaseModelV1] = PayloadV1
 
     prioritized_rulesets: Optional[Sequence[Ruleset]] = None
