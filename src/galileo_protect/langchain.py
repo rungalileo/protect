@@ -3,7 +3,7 @@ from typing import Optional, Sequence, Type
 from galileo_core.schemas.protect.response import Response
 from langchain_core.runnables.base import Runnable
 from langchain_core.tools import BaseTool
-from pydantic import UUID4, BaseModel, ConfigDict
+from pydantic import UUID4, BaseModel, ConfigDict, Field
 from pydantic.v1 import BaseModel as BaseModelV1
 
 from galileo_protect.constants.invoke import TIMEOUT
@@ -74,17 +74,24 @@ class ProtectTool(BaseTool):
 
 
 class ProtectParser(BaseModel):
-    chain: Runnable
+    chain: Runnable = Field(..., description="The chain to trigger if the Protect invocation is not triggered.")
+    ignore_trigger: bool = Field(
+        default=False,
+        description="Ignore the status of the Protect invocation and always trigger the rest of the chain.",
+    )
+    echo_output: bool = Field(default=False, description="Echo the output of the Protect invocation.")
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    def parser(self, output: str) -> str:
+    def parser(self, response_raw_json: str) -> str:
         try:
-            response = Response.model_validate_json(output)
+            response = Response.model_validate_json(response_raw_json)
         except Exception:
-            return self.chain.invoke(output)
+            return self.chain.invoke(response_raw_json)
         text = response.text
-        if response.status == "TRIGGERED":
+        if self.echo_output:
+            print(f"> Raw response: {text}")
+        if response.status == "TRIGGERED" and not self.ignore_trigger:
             return text
         else:
             return self.chain.invoke(text)
