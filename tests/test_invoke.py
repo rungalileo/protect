@@ -193,11 +193,14 @@ class TestInvoke:
             stage_id=config.stage_id if include_stage_id else None,
             timeout=timeout,
             config=config,
+            # Metadata and headers are not used by the tool since they conflict with the
+            # langchain_core tool interface.
             # metadata=metadata,
             # headers=headers,
         )
-        response = tool.run(payload.model_dump())
-        assert isinstance(response, dict)
-        assert response.get("text") is not None
-        assert response.get("status") == "NOT_TRIGGERED"
+        response_json = tool.run(payload.model_dump())
+        assert isinstance(response_json, str)
+        response = Response.model_validate_json(response_json)
+        assert response.text is not None
+        assert response.status == "NOT_TRIGGERED"
         assert mock_invoke.called
