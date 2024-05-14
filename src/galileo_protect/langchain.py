@@ -1,5 +1,6 @@
 from typing import Optional, Sequence, Type
 
+from galileo_core.schemas.protect.response import Response
 from langchain_core.runnables.base import Runnable
 from langchain_core.tools import BaseTool
 from pydantic import UUID4, BaseModel, ConfigDict
@@ -9,7 +10,6 @@ from galileo_protect.constants.invoke import TIMEOUT
 from galileo_protect.helpers.config import ProtectConfig
 from galileo_protect.invoke import ainvoke, invoke
 from galileo_protect.schemas import Payload, Ruleset
-from galileo_protect.schemas.invoke import Response
 
 
 class PayloadV1(BaseModelV1):

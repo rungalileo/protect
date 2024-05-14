@@ -6,13 +6,13 @@ from unittest.mock import Mock, patch
 from uuid import UUID
 
 from galileo_core.constants.routes import Routes as CoreRoutes
+from galileo_core.schemas.protect.response import Response
 from pytest import MonkeyPatch, fixture
 from requests_mock import GET, POST
 from requests_mock.adapter import _Matcher
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
-from galileo_protect.schemas.invoke import Response
 from tests.data import A_CONSOLE_URL, A_JWT_TOKEN, A_PROTECT_INPUT
 
 

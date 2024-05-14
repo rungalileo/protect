@@ -1,5 +1,6 @@
 from typing import Dict, Optional, Sequence
 
+from galileo_core.schemas.protect.response import Response
 from pydantic import UUID4
 from requests import post
 
@@ -7,7 +8,6 @@ from galileo_protect.constants.invoke import TIMEOUT
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
 from galileo_protect.schemas import Payload, Request, Ruleset
-from galileo_protect.schemas.invoke import Response
 
 
 def invoke(
