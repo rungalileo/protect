@@ -1,0 +1,90 @@
+from typing import Optional, Sequence, Type
+
+from langchain_core.runnables.base import Runnable
+from langchain_core.tools import BaseTool
+from pydantic import UUID4, BaseModel, ConfigDict
+from pydantic.v1 import BaseModel as BaseModelV1
+
+from galileo_protect.constants.invoke import TIMEOUT
+from galileo_protect.helpers.config import ProtectConfig
+from galileo_protect.invoke import ainvoke, invoke
+from galileo_protect.schemas import Payload, Ruleset
+from galileo_protect.schemas.invoke import Response
+
+
+class PayloadV1(BaseModelV1):
+    input: Optional[str] = None
+    output: Optional[str] = None
+
+
+class ProtectTool(BaseTool):
+    name: str = "GalileoProtect"
+    description: str = (
+        "Protect your LLM applications from harmful content using Galileo Protect. "
+        "This tool is a wrapper around Galileo's Protect API, can be used to scan text "
+        "for harmful content, and can be used to trigger actions based on the results."
+        "The tool can be used synchronously or asynchronously, on the input text or output text,"
+        "and can be configured with a set of rulesets to evaluate on."
+    )
+    args_schema: Type[BaseModelV1] = PayloadV1
+
+    prioritized_rulesets: Optional[Sequence[Ruleset]] = None
+    project_id: Optional[UUID4] = None
+    stage_name: Optional[str] = None
+    stage_id: Optional[UUID4] = None
+    timeout: float = TIMEOUT
+    config: Optional[ProtectConfig] = None
+
+    def _run(self, input: Optional[str] = None, output: Optional[str] = None) -> str:
+        """
+        Apply the tool synchronously.
+
+        We serialize the response to JSON because that's what `langchain_core` expects
+        for tools.
+        """
+        payload = Payload(input=input, output=output)
+        return invoke(
+            payload=payload,
+            prioritized_rulesets=self.prioritized_rulesets,
+            project_id=self.project_id,
+            stage_name=self.stage_name,
+            stage_id=self.stage_id,
+            timeout=self.timeout,
+            config=self.config,
+        ).model_dump_json()
+
+    async def _arun(self, input: Optional[str] = None, output: Optional[str] = None) -> str:
+        """
+        Apply the tool asynchronously.
+
+        We serialize the response to JSON because that's what `langchain_core` expects
+        for tools.
+        """
+        payload = Payload(input=input, output=output)
+        response = await ainvoke(
+            prioritized_rulesets=self.prioritized_rulesets,
+            payload=payload,
+            project_id=self.project_id,
+            stage_name=self.stage_name,
+            stage_id=self.stage_id,
+            timeout=self.timeout,
+            config=self.config,
+        )
+        return response.model_dump_json()
+
+
+class ProtectParser(BaseModel):
+    chain: Runnable
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    def parser(self, output: str) -> str:
+        try:
+            response = Response.model_validate_json(output)
+        except Exception:
+            return self.chain.invoke(output)
+        text = response.text
+        if response.status == "TRIGGERED":
+            return text
+        else:
+            return self.chain.invoke(text)
