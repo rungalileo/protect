@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Sequence, Type
+from typing import Optional, Sequence, Type
 
 from langchain_core.runnables.base import Runnable
 from langchain_core.tools import BaseTool
@@ -9,6 +9,7 @@ from galileo_protect.constants.invoke import TIMEOUT
 from galileo_protect.helpers.config import ProtectConfig
 from galileo_protect.invoke import ainvoke, invoke
 from galileo_protect.schemas import Payload, Ruleset
+from galileo_protect.schemas.invoke import Response
 
 
 class PayloadV1(BaseModelV1):
@@ -34,8 +35,13 @@ class ProtectTool(BaseTool):
     timeout: float = TIMEOUT
     config: Optional[ProtectConfig] = None
 
-    def _run(self, input: Optional[str] = None, output: Optional[str] = None) -> Dict[str, Any]:
-        """Use the tool."""
+    def _run(self, input: Optional[str] = None, output: Optional[str] = None) -> str:
+        """
+        Apply the tool synchronously.
+
+        We serialize the response to JSON because that's what `langchain_core` expects
+        for tools.
+        """
         payload = Payload(input=input, output=output)
         return invoke(
             payload=payload,
@@ -45,10 +51,15 @@ class ProtectTool(BaseTool):
             stage_id=self.stage_id,
             timeout=self.timeout,
             config=self.config,
-        ).model_dump()
+        ).model_dump_json()
 
-    async def _arun(self, input: Optional[str] = None, output: Optional[str] = None) -> Dict[str, Any]:
-        """Use the tool asynchronously."""
+    async def _arun(self, input: Optional[str] = None, output: Optional[str] = None) -> str:
+        """
+        Apply the tool asynchronously.
+
+        We serialize the response to JSON because that's what `langchain_core` expects
+        for tools.
+        """
         payload = Payload(input=input, output=output)
         response = await ainvoke(
             prioritized_rulesets=self.prioritized_rulesets,
@@ -59,7 +70,7 @@ class ProtectTool(BaseTool):
             timeout=self.timeout,
             config=self.config,
         )
-        return response.model_dump()
+        return response.model_dump_json()
 
 
 class ProtectParser(BaseModel):
@@ -67,9 +78,13 @@ class ProtectParser(BaseModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    def parser(self, output: Dict[str, Any]) -> str:
-        text = output.get("text", "")
-        if output.get("status") == "TRIGGERED":
+    def parser(self, output: str) -> str:
+        try:
+            response = Response.model_validate_json(output)
+        except Exception:
+            return self.chain.invoke(output)
+        text = response.text
+        if response.status == "TRIGGERED":
             return text
         else:
             return self.chain.invoke(text)
