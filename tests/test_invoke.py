@@ -2,12 +2,12 @@ from typing import Callable, List
 from unittest.mock import Mock
 from uuid import uuid4
 
+from galileo_core.schemas.protect.response import Response
 from pytest import mark
 
 from galileo_protect.invoke import ainvoke, invoke
 from galileo_protect.langchain import ProtectTool
 from galileo_protect.schemas import Payload, Rule, RuleOperator, Ruleset
-from galileo_protect.schemas.invoke import Response
 from tests.data import A_PROTECT_INPUT, A_STAGE_NAME
 
 
