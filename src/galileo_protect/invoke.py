@@ -4,7 +4,7 @@ from galileo_core.schemas.protect.response import Response
 from pydantic import UUID4
 from requests import post
 
-from galileo_protect.constants.invoke import TIMEOUT
+from galileo_protect.constants.invoke import TIMEOUT, TIMEOUT_MARGIN
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
 from galileo_protect.schemas import Payload, Request, Ruleset
@@ -35,6 +35,8 @@ def invoke(
             metadata=metadata,
             headers=headers,
         ).model_dump(mode="json"),
+        # Set the read timeout to the maximum of the timeout plus the timeout margin.
+        read_timeout=timeout + TIMEOUT_MARGIN,
     )
     return Response.model_validate(response_json)
 
