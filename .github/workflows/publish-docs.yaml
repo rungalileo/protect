@@ -44,7 +44,7 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_PROTECT_DOCS_DEPLOY_KEY }}
         with:
-          source-directory: "docs/build/html"
+          source-directory: "site/"
           target-directory: "docs/"
           destination-github-username: "rungalileo"
           destination-repository-name: "protect-docs"

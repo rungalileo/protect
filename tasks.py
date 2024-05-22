@@ -28,6 +28,4 @@ def type_check(ctx: Context) -> None:
 
 @task
 def docs_build(ctx: Context) -> None:
-    ctx.run("poetry run sphinx-apidoc -f -o docs/source src/galileo_protect/", echo=True)
-    ctx.run("poetry run sphinx-build -M markdown docs/source docs/build/md", echo=True)
-    ctx.run("poetry run sphinx-build -b html docs/source/ docs/build/html", echo=True)
+    ctx.run("poetry run mkdocs build", echo=True)
