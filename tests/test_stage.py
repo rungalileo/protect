@@ -1,9 +1,8 @@
 from typing import Callable, Union
-from urllib.parse import urlencode
 from uuid import uuid4
 
+from galileo_core.constants.request_method import RequestMethod
 from pytest import mark, raises
-from requests_mock import POST, PUT
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.schemas import Action, OverrideAction, PassthroughAction
@@ -41,7 +40,7 @@ class TestCreate:
             action_enabled=action_enabled,
         )
         matcher = mock_request(
-            POST,
+            RequestMethod.POST,
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
@@ -89,7 +88,7 @@ class TestCreate:
             action_enabled=action_enabled,
         )
         matcher = mock_request(
-            POST,
+            RequestMethod.POST,
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
@@ -138,10 +137,9 @@ class TestPause:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config()
         matcher = mock_request(
-            PUT,
-            Routes.stage.format(project_id=project_id, stage_id=stage_id)
-            + "?"
-            + urlencode({"action_enabled": action_enabled}),
+            RequestMethod.PUT,
+            Routes.stage.format(project_id=project_id, stage_id=stage_id),
+            params={"action_enabled": action_enabled},
         )
         pause_stage(project_id=project_id, stage_id=stage_id, config=config)
         assert matcher.called
@@ -155,10 +153,9 @@ class TestPause:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config(project_id=project_id, stage_id=stage_id)
         matcher = mock_request(
-            PUT,
-            Routes.stage.format(project_id=project_id, stage_id=stage_id)
-            + "?"
-            + urlencode({"action_enabled": action_enabled}),
+            RequestMethod.PUT,
+            Routes.stage.format(project_id=project_id, stage_id=stage_id),
+            params={"action_enabled": action_enabled},
         )
         pause_stage(config=config)
         assert matcher.called
@@ -186,10 +183,9 @@ class TestResume:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config()
         matcher = mock_request(
-            PUT,
-            Routes.stage.format(project_id=project_id, stage_id=stage_id)
-            + "?"
-            + urlencode({"action_enabled": action_enabled}),
+            RequestMethod.PUT,
+            Routes.stage.format(project_id=project_id, stage_id=stage_id),
+            params={"action_enabled": action_enabled},
         )
         resume_stage(project_id=project_id, stage_id=stage_id, config=config)
         assert matcher.called
@@ -203,10 +199,9 @@ class TestResume:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config(project_id=project_id, stage_id=stage_id)
         matcher = mock_request(
-            PUT,
-            Routes.stage.format(project_id=project_id, stage_id=stage_id)
-            + "?"
-            + urlencode({"action_enabled": action_enabled}),
+            RequestMethod.PUT,
+            Routes.stage.format(project_id=project_id, stage_id=stage_id),
+            params={"action_enabled": action_enabled},
         )
         resume_stage(config=config)
         assert matcher.called
