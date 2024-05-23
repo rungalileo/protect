@@ -1,8 +1,8 @@
 from typing import Optional
 
+from galileo_core.constants.request_method import RequestMethod
 from galileo_core.utils.name import ts_name
 from pydantic import UUID4
-from requests import post, put
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
@@ -25,7 +25,7 @@ def create_stage(
     name = name or ts_name("stage")
     stage = StageResponse.model_validate(
         config.api_client.request(
-            post,
+            RequestMethod.POST,
             Routes.stages.format(project_id=project_id),
             json=Stage(
                 name=name, project_id=project_id, description=description, action=action, action_enabled=action_enabled
@@ -76,7 +76,7 @@ def pause_stage(
     if stage_id is None:
         raise ValueError("Stage ID must be provided to pause a stage.")
     config.api_client.request(
-        put,
+        RequestMethod.PUT,
         Routes.stage.format(project_id=project_id, stage_id=stage_id),
         params=dict(action_enabled=True),
     )
@@ -96,7 +96,7 @@ def resume_stage(
     if stage_id is None:
         raise ValueError("Stage ID must be provided to resume a stage.")
     config.api_client.request(
-        put,
+        RequestMethod.PUT,
         Routes.stage.format(project_id=project_id, stage_id=stage_id),
         params=dict(action_enabled=False),
     )

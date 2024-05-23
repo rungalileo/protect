@@ -1,8 +1,8 @@
 from typing import Dict, Optional, Sequence
 
+from galileo_core.constants.request_method import RequestMethod
 from galileo_core.schemas.protect.response import Response
 from pydantic import UUID4
-from requests import post
 
 from galileo_protect.constants.invoke import TIMEOUT, TIMEOUT_MARGIN
 from galileo_protect.constants.routes import Routes
@@ -23,7 +23,7 @@ def invoke(
 ) -> Response:
     protect_config: ProtectConfig = config or ProtectConfig.get()
     response_json = protect_config.api_client.request(
-        post,
+        RequestMethod.POST,
         Routes.invoke,
         json=Request(
             payload=payload,
