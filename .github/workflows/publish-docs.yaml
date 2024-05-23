@@ -37,7 +37,6 @@ jobs:
       - name: Add GitHub Pages Config
         run: |
           touch site/.nojekyll
-          echo "protect.docs.rungalileo.io" > site/CNAME
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
