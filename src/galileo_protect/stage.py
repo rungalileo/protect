@@ -6,7 +6,7 @@ from pydantic import UUID4
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
-from galileo_protect.schemas import Action, PassthroughAction, Stage
+from galileo_protect.schemas import Stage
 from galileo_protect.schemas.stage import StageResponse
 
 
@@ -14,8 +14,7 @@ def create_stage(
     project_id: Optional[UUID4] = None,
     name: Optional[str] = None,
     description: Optional[str] = None,
-    action: Action = PassthroughAction(),
-    action_enabled: bool = False,
+    pause: bool = False,
     config: Optional[ProtectConfig] = None,
 ) -> StageResponse:
     config = config or ProtectConfig.get()
@@ -27,9 +26,7 @@ def create_stage(
         config.api_client.request(
             RequestMethod.POST,
             Routes.stages.format(project_id=project_id),
-            json=Stage(
-                name=name, project_id=project_id, description=description, action=action, action_enabled=action_enabled
-            ).model_dump(mode="json"),
+            json=Stage(name=name, project_id=project_id, description=description, paused=pause).model_dump(mode="json"),
         )
     )
     config.project_id = project_id
@@ -78,7 +75,7 @@ def pause_stage(
     config.api_client.request(
         RequestMethod.PUT,
         Routes.stage.format(project_id=project_id, stage_id=stage_id),
-        params=dict(action_enabled=True),
+        params=dict(pause=True),
     )
     config.project_id = project_id
     config.stage_id = stage_id
@@ -98,7 +95,7 @@ def resume_stage(
     config.api_client.request(
         RequestMethod.PUT,
         Routes.stage.format(project_id=project_id, stage_id=stage_id),
-        params=dict(action_enabled=False),
+        params=dict(pause=False),
     )
     config.project_id = project_id
     config.stage_id = stage_id

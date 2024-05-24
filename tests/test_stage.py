@@ -12,12 +12,12 @@ from galileo_protect.stage import create_stage, pause_stage, resume_stage
 
 class TestCreate:
     @mark.parametrize(
-        ["name", "description", "action", "action_enabled"],
+        ["name", "description", "paused"],
         [
-            ("stage", "description", OverrideAction(choices=["foo"]), False),
-            ("stage", "description", OverrideAction(choices=["foo"]), True),
-            ("stage", "description", PassthroughAction(), False),
-            ("stage", "description", PassthroughAction(), True),
+            ("stage", "description", False),
+            ("stage", "description", True),
+            ("stage", "description", False),
+            ("stage", "description", True),
         ],
     )
     def test_simple(
@@ -26,8 +26,7 @@ class TestCreate:
         mock_request: Callable,
         name: str,
         description: str,
-        action: Action,
-        action_enabled: bool,
+        paused: bool,
     ) -> None:
         config = set_validated_config()
         project_id, stage_id = uuid4(), uuid4()
@@ -36,8 +35,7 @@ class TestCreate:
             name=name,
             project_id=project_id,
             description=description,
-            action=action,
-            action_enabled=action_enabled,
+            paused=paused,
         )
         matcher = mock_request(
             RequestMethod.POST,
@@ -48,8 +46,7 @@ class TestCreate:
             project_id=project_id,
             name=name,
             description=description,
-            action=action,
-            action_enabled=action_enabled,
+            pause=paused,
             config=config,
         )
         assert matcher.called
@@ -60,22 +57,16 @@ class TestCreate:
         assert config.stage_name == "stage"
 
     @mark.parametrize(
-        ["name", "description", "action", "action_enabled"],
+        ["name", "description", "paused"],
         [
-            ("stage", "description", OverrideAction(choices=["foo"]), False),
-            ("stage", "description", OverrideAction(choices=["foo"]), True),
-            ("stage", "description", PassthroughAction(), False),
-            ("stage", "description", PassthroughAction(), True),
+            ("stage", "description", False),
+            ("stage", "description", True),
+            ("stage", "description", False),
+            ("stage", "description", True),
         ],
     )
     def test_project_id_from_config(
-        self,
-        set_validated_config: Callable,
-        mock_request: Callable,
-        name: str,
-        description: str,
-        action: Action,
-        action_enabled: bool,
+        self, set_validated_config: Callable, mock_request: Callable, name: str, description: str, paused: bool
     ) -> None:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config(project_id=project_id)
@@ -84,8 +75,7 @@ class TestCreate:
             name=name,
             project_id=project_id,
             description=description,
-            action=action,
-            action_enabled=action_enabled,
+            paused=paused,
         )
         matcher = mock_request(
             RequestMethod.POST,
@@ -95,8 +85,7 @@ class TestCreate:
         create_stage(
             name=name,
             description=description,
-            action=action,
-            action_enabled=action_enabled,
+            pause=paused,
             config=config,
         )
         assert matcher.called
@@ -107,7 +96,7 @@ class TestCreate:
         assert config.stage_name == "stage"
 
     @mark.parametrize(
-        ["name", "description", "action", "action_enabled"],
+        ["name", "description", "action", "pause"],
         [
             ("stage", "description", OverrideAction(choices=["foo"]), False),
             ("stage", "description", OverrideAction(choices=["foo"]), True),
@@ -121,7 +110,7 @@ class TestCreate:
         name: str,
         description: str,
         action: Action,
-        action_enabled: bool,
+        pause: bool,
     ) -> None:
         config = set_validated_config()
         with raises(ValueError) as exc_info:
@@ -130,32 +119,30 @@ class TestCreate:
 
 
 class TestPause:
-    @mark.parametrize("action_enabled", ["true", True])
-    def test_params(
-        self, set_validated_config: Callable, mock_request: Callable, action_enabled: Union[str, bool]
-    ) -> None:
+    @mark.parametrize("pause", ["true", True])
+    def test_params(self, set_validated_config: Callable, mock_request: Callable, pause: Union[str, bool]) -> None:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config()
         matcher = mock_request(
             RequestMethod.PUT,
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
-            params={"action_enabled": action_enabled},
+            params={"pause": pause},
         )
         pause_stage(project_id=project_id, stage_id=stage_id, config=config)
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
 
-    @mark.parametrize("action_enabled", ["true", True])
+    @mark.parametrize("pause", ["true", True])
     def test_project_id_from_config(
-        self, set_validated_config: Callable, mock_request: Callable, action_enabled: Union[str, bool]
+        self, set_validated_config: Callable, mock_request: Callable, pause: Union[str, bool]
     ) -> None:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config(project_id=project_id, stage_id=stage_id)
         matcher = mock_request(
             RequestMethod.PUT,
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
-            params={"action_enabled": action_enabled},
+            params={"pause": pause},
         )
         pause_stage(config=config)
         assert matcher.called
@@ -176,32 +163,30 @@ class TestPause:
 
 
 class TestResume:
-    @mark.parametrize("action_enabled", ["false", False])
-    def test_params(
-        self, set_validated_config: Callable, mock_request: Callable, action_enabled: Union[str, bool]
-    ) -> None:
+    @mark.parametrize("pause", ["false", False])
+    def test_params(self, set_validated_config: Callable, mock_request: Callable, pause: Union[str, bool]) -> None:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config()
         matcher = mock_request(
             RequestMethod.PUT,
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
-            params={"action_enabled": action_enabled},
+            params={"pause": pause},
         )
         resume_stage(project_id=project_id, stage_id=stage_id, config=config)
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
 
-    @mark.parametrize("action_enabled", ["false", False])
+    @mark.parametrize("pause", ["false", False])
     def test_project_id_from_config(
-        self, set_validated_config: Callable, mock_request: Callable, action_enabled: Union[str, bool]
+        self, set_validated_config: Callable, mock_request: Callable, pause: Union[str, bool]
     ) -> None:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config(project_id=project_id, stage_id=stage_id)
         matcher = mock_request(
             RequestMethod.PUT,
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
-            params={"action_enabled": action_enabled},
+            params={"pause": pause},
         )
         resume_stage(config=config)
         assert matcher.called
