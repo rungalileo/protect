@@ -36,15 +36,14 @@ jobs:
 
       - name: Add GitHub Pages Config
         run: |
-          touch docs/build/html/.nojekyll
-          echo "protect.docs.rungalileo.io" > docs/build/html/CNAME
+          touch site/.nojekyll
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_PROTECT_DOCS_DEPLOY_KEY }}
         with:
-          source-directory: "docs/build/html"
+          source-directory: "site/"
           target-directory: "docs/"
           destination-github-username: "rungalileo"
           destination-repository-name: "protect-docs"
