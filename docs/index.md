@@ -1,3 +1,3 @@
 ::: galileo_protect
     options:
-      show_submodules: true
+      show_submodules: false
