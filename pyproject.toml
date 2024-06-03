@@ -102,11 +102,9 @@ plugins = ["pydantic.mypy"]
 
 # Release.
 [tool.semantic_release]
+# Package version.
 version_variables = [
-    # Package version.
-    "src/galileo_protect/__init__.py:__version__",
-    # Docs version.
-    "docs/source/conf.py:release",
+    "src/galileo_protect/__init__.py:__version__"
 ]
 version_toml = ["pyproject.toml:tool.poetry.version"]
 version_source = "tag"
