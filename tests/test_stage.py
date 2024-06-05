@@ -5,37 +5,27 @@ from galileo_core.constants.request_method import RequestMethod
 from pytest import mark, raises
 
 from galileo_protect.constants.routes import Routes
-from galileo_protect.schemas import Action, OverrideAction, PassthroughAction
 from galileo_protect.schemas.stage import StageResponse
 from galileo_protect.stage import create_stage, pause_stage, resume_stage
+from tests.data import A_STAGE_NAME
 
 
 class TestCreate:
     @mark.parametrize(
-        ["name", "description", "paused"],
-        [
-            ("stage", "description", False),
-            ("stage", "description", True),
-            ("stage", "description", False),
-            ("stage", "description", True),
-        ],
+        ["description", "pause"],
+        [("description", False), ("description", True), ("description", False), ("description", True)],
     )
     def test_simple(
-        self,
-        set_validated_config: Callable,
-        mock_request: Callable,
-        name: str,
-        description: str,
-        paused: bool,
+        self, set_validated_config: Callable, mock_request: Callable, description: str, pause: bool
     ) -> None:
         config = set_validated_config()
         project_id, stage_id = uuid4(), uuid4()
         response = StageResponse(
             id=stage_id,
-            name=name,
+            name=A_STAGE_NAME,
             project_id=project_id,
             description=description,
-            paused=paused,
+            paused=pause,
         )
         matcher = mock_request(
             RequestMethod.POST,
@@ -44,9 +34,9 @@ class TestCreate:
         )
         create_stage(
             project_id=project_id,
-            name=name,
+            name=A_STAGE_NAME,
             description=description,
-            pause=paused,
+            pause=pause,
             config=config,
         )
         assert matcher.called
@@ -54,28 +44,23 @@ class TestCreate:
         assert config.stage_id is not None
         assert config.stage_id == stage_id
         assert config.stage_name is not None
-        assert config.stage_name == "stage"
+        assert config.stage_name == A_STAGE_NAME
 
     @mark.parametrize(
-        ["name", "description", "paused"],
-        [
-            ("stage", "description", False),
-            ("stage", "description", True),
-            ("stage", "description", False),
-            ("stage", "description", True),
-        ],
+        ["description", "pause"],
+        [("description", False), ("description", True), ("description", False), ("description", True)],
     )
     def test_project_id_from_config(
-        self, set_validated_config: Callable, mock_request: Callable, name: str, description: str, paused: bool
+        self, set_validated_config: Callable, mock_request: Callable, description: str, pause: bool
     ) -> None:
         project_id, stage_id = uuid4(), uuid4()
         config = set_validated_config(project_id=project_id)
         response = StageResponse(
             id=stage_id,
-            name=name,
+            name=A_STAGE_NAME,
             project_id=project_id,
             description=description,
-            paused=paused,
+            paused=pause,
         )
         matcher = mock_request(
             RequestMethod.POST,
@@ -83,9 +68,9 @@ class TestCreate:
             json=response.model_dump(mode="json"),
         )
         create_stage(
-            name=name,
+            name=A_STAGE_NAME,
             description=description,
-            pause=paused,
+            pause=pause,
             config=config,
         )
         assert matcher.called
@@ -93,25 +78,9 @@ class TestCreate:
         assert config.stage_id is not None
         assert config.stage_id == stage_id
         assert config.stage_name is not None
-        assert config.stage_name == "stage"
+        assert config.stage_name == A_STAGE_NAME
 
-    @mark.parametrize(
-        ["name", "description", "action", "pause"],
-        [
-            ("stage", "description", OverrideAction(choices=["foo"]), False),
-            ("stage", "description", OverrideAction(choices=["foo"]), True),
-            ("stage", "description", PassthroughAction(), False),
-            ("stage", "description", PassthroughAction(), True),
-        ],
-    )
-    def test_raises_missing_project_id(
-        self,
-        set_validated_config: Callable,
-        name: str,
-        description: str,
-        action: Action,
-        pause: bool,
-    ) -> None:
+    def test_raises_missing_project_id(self, set_validated_config: Callable) -> None:
         config = set_validated_config()
         with raises(ValueError) as exc_info:
             create_stage(config=config)

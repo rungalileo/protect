@@ -7,6 +7,7 @@ from langchain_core.language_models.llms import LLM
 from pytest import CaptureFixture, mark
 
 from galileo_protect.langchain import ProtectParser
+from tests.data import A_TRACE_METADATA_DICT
 
 
 class ProtectLLM(LLM):
@@ -27,14 +28,14 @@ class ProtectLLM(LLM):
 @mark.parametrize(
     ["output", "ignore_trigger", "expected_return", "expected_call_count"],
     [
-        [dumps({"text": "foo"}), False, "foo", 1],
-        [dumps({"text": "foo"}), True, "foo", 1],
-        [dumps({"text": "timeout", "status": "TIMEOUT"}), False, "timeout", 1],
-        [dumps({"text": "timeout", "status": "TIMEOUT"}), True, "timeout", 1],
-        [dumps({"text": "success", "status": "SUCCESS"}), False, "success", 1],
-        [dumps({"text": "success", "status": "SUCCESS"}), True, "success", 1],
-        [dumps({"text": "triggered", "status": "TRIGGERED"}), False, "triggered", 0],
-        [dumps({"text": "triggered", "status": "TRIGGERED"}), True, "triggered", 1],
+        [dumps({"text": "foo", **A_TRACE_METADATA_DICT}), False, "foo", 1],
+        [dumps({"text": "foo", **A_TRACE_METADATA_DICT}), True, "foo", 1],
+        [dumps({"text": "timeout", "status": "TIMEOUT", **A_TRACE_METADATA_DICT}), False, "timeout", 1],
+        [dumps({"text": "timeout", "status": "TIMEOUT", **A_TRACE_METADATA_DICT}), True, "timeout", 1],
+        [dumps({"text": "success", "status": "SUCCESS", **A_TRACE_METADATA_DICT}), False, "success", 1],
+        [dumps({"text": "success", "status": "SUCCESS", **A_TRACE_METADATA_DICT}), True, "success", 1],
+        [dumps({"text": "triggered", "status": "TRIGGERED", **A_TRACE_METADATA_DICT}), False, "triggered", 0],
+        [dumps({"text": "triggered", "status": "TRIGGERED", **A_TRACE_METADATA_DICT}), True, "triggered", 1],
     ],
 )
 def test_parser(output: str, ignore_trigger: bool, expected_return: str, expected_call_count: int) -> None:
@@ -48,6 +49,6 @@ def test_parser(output: str, ignore_trigger: bool, expected_return: str, expecte
 @mark.parametrize(["echo_output", "expected_output"], [[True, "> Raw response: foo\n"], [False, ""]])
 def test_echo(echo_output: bool, expected_output: str, capsys: CaptureFixture) -> None:
     parser = ProtectParser(chain=ProtectLLM(), echo_output=echo_output)
-    parser.parser(dumps({"text": "foo"}))
+    parser.parser(dumps({"text": "foo", **A_TRACE_METADATA_DICT}))
     captured = capsys.readouterr()
     assert captured.out == expected_output
