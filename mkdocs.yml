@@ -2,6 +2,7 @@ site_name: Galileo Protect
 
 nav:
   - Galileo Protect Reference: index.md
+  - Galileo Docs: https://docs.rungalileo.io/
 
 theme:
   name: material
