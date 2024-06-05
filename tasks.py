@@ -27,5 +27,5 @@ def type_check(ctx: Context) -> None:
 
 
 @task
-def docs_build(ctx: Context) -> None:
+def docs_local_build(ctx: Context) -> None:
     ctx.run("poetry run mkdocs build", echo=True)

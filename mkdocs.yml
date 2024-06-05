@@ -2,6 +2,7 @@ site_name: Galileo Protect
 
 nav:
   - Galileo Protect Reference: index.md
+  - Galileo Docs: https://docs.rungalileo.io/
 
 theme:
   name: material
@@ -23,6 +24,7 @@ theme:
     primary: deep purple
     accent: purple
 copyright: Copyright &copy; 2024 Galileo Technologies, Inc.
+remote_branch: docs
 extra:
   generator: false
 
