@@ -5,7 +5,7 @@ from uuid import UUID
 
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.constants.routes import Routes as CoreRoutes
-from galileo_core.schemas.protect.response import Response
+from galileo_core.schemas.protect.response import Response, TraceMetadata
 from pytest import MonkeyPatch, fixture
 
 from galileo_protect.constants.routes import Routes
@@ -57,7 +57,11 @@ def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None) -> Callable
 @fixture
 def mock_invoke(mock_request: Mock) -> Generator[None, None, None]:
     matcher = mock_request(
-        RequestMethod.POST, Routes.invoke, json=Response(text=A_PROTECT_INPUT, status="NOT_TRIGGERED").model_dump()
+        RequestMethod.POST,
+        Routes.invoke,
+        json=Response(text=A_PROTECT_INPUT, status="NOT_TRIGGERED", trace_metadata=TraceMetadata()).model_dump(
+            mode="json"
+        ),
     )
     yield matcher
     assert matcher.called

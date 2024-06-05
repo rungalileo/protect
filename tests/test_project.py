@@ -6,19 +6,21 @@ from galileo_core.constants.routes import Routes as CoreRoutes
 from galileo_core.schemas.core.project import ProjectType
 
 from galileo_protect.project import create_project
+from tests.data import A_PROJECT_NAME
 
 
 def test_create_project(set_validated_config: Callable, mock_request: Callable) -> None:
     config = set_validated_config()
-    project_name = "foo-bar"
     project_id = uuid4()
-    matcher_get = mock_request(RequestMethod.GET, CoreRoutes.projects + f"?project_name={project_name}", json=[])
+    matcher_get = mock_request(
+        RequestMethod.GET, CoreRoutes.projects, params=dict(project_name=A_PROJECT_NAME), json=[]
+    )
     matcher_post = mock_request(
         RequestMethod.POST,
         CoreRoutes.projects,
-        json={"id": str(project_id), "type": ProjectType.protect, "name": project_name},
+        json={"id": str(project_id), "type": ProjectType.protect, "name": A_PROJECT_NAME},
     )
-    create_project(name=project_name, config=config)
+    create_project(name=A_PROJECT_NAME, config=config)
     assert matcher_get.called
     assert matcher_post.called
     # Verify that the project ID was set in the config.
