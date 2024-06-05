@@ -21,6 +21,37 @@ def create_stage(
     prioritzed_rulesets: Optional[Sequence[Ruleset]] = None,
     config: Optional[ProtectConfig] = None,
 ) -> StageResponse:
+    """
+    Create a stage.
+
+    Parameters
+    ----------
+    project_id : Optional[UUID4], optional
+        Project ID, by default we will try to get it from the config.
+    name : Optional[str], optional
+        Stage name, by default created with a timestamp.
+    description : Optional[str], optional
+        Stage description, by default None.
+    pause : bool, optional
+        Pause the stage, by default False, i.e. the stage is not paused.
+    type : StageType, optional
+        Stage type, by default StageType.local.
+    prioritzed_rulesets : Optional[Sequence[Ruleset]], optional
+        Prioritized rulesets, by default None.
+    config : Optional[ProtectConfig], optional
+        Protect config, by default it will be taken from the env vars or the local
+        config file.
+
+    Returns
+    -------
+    StageResponse
+        Stage creation response.
+
+    Raises
+    ------
+    ValueError
+        If the project ID is not provided or found.
+    """
     config = config or ProtectConfig.get()
     project_id = project_id or config.project_id
     prioritzed_rulesets = prioritzed_rulesets or list()
