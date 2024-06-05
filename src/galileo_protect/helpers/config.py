@@ -12,9 +12,11 @@ class ProtectConfig(GalileoConfig):
     project_id: Optional[UUID4] = None
     stage_name: Optional[str] = None
     stage_id: Optional[UUID4] = None
+    stage_version: Optional[int] = None
 
     def reset(self) -> None:
         super().reset()
         self.project_id = None
         self.stage_name = None
         self.stage_id = None
+        self.stage_version = None

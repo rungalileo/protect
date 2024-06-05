@@ -1,9 +1,11 @@
-from typing import Callable, Union
+from typing import Callable, Sequence, Union
 from uuid import uuid4
 
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.constants.routes import Routes as CoreRoutes
 from galileo_core.schemas.core.project import ProjectResponse, ProjectType
+from galileo_core.schemas.protect.ruleset import Ruleset
+from galileo_core.schemas.protect.stage import StageType
 from pytest import mark, raises
 
 from galileo_protect.constants.routes import Routes
@@ -17,7 +19,7 @@ class TestCreate:
         ["description", "pause"],
         [("description", False), ("description", True), ("description", False), ("description", True)],
     )
-    def test_simple(
+    def test_args_local(
         self, set_validated_config: Callable, mock_request: Callable, description: str, pause: bool
     ) -> None:
         config = set_validated_config()
@@ -28,13 +30,14 @@ class TestCreate:
             project_id=project_id,
             description=description,
             paused=pause,
+            type=StageType.local,
         )
         matcher = mock_request(
             RequestMethod.POST,
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        create_stage(
+        stage = create_stage(
             project_id=project_id,
             name=A_STAGE_NAME,
             description=description,
@@ -42,17 +45,24 @@ class TestCreate:
             config=config,
         )
         assert matcher.called
+        # Verify the config.
         assert config.project_id == project_id
         assert config.stage_id is not None
         assert config.stage_id == stage_id
         assert config.stage_name is not None
         assert config.stage_name == A_STAGE_NAME
+        # Verify the HTTP response.
+        assert stage.id == stage_id
+        assert stage.type == StageType.local
+        assert stage.description == description
+        assert stage.paused == pause
+        assert stage.version is None
 
     @mark.parametrize(
         ["description", "pause"],
         [("description", False), ("description", True), ("description", False), ("description", True)],
     )
-    def test_project_id_from_config(
+    def test_config_local(
         self, set_validated_config: Callable, mock_request: Callable, description: str, pause: bool
     ) -> None:
         project_id, stage_id = uuid4(), uuid4()
@@ -69,18 +79,130 @@ class TestCreate:
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        create_stage(
+        stage = create_stage(
             name=A_STAGE_NAME,
             description=description,
             pause=pause,
             config=config,
         )
         assert matcher.called
+        # Verify the config.
         assert config.project_id == project_id
         assert config.stage_id is not None
         assert config.stage_id == stage_id
         assert config.stage_name is not None
         assert config.stage_name == A_STAGE_NAME
+        # Verify the HTTP response.
+        assert stage.id == stage_id
+        assert stage.type == StageType.local
+        assert stage.description == description
+        assert stage.paused == pause
+        assert stage.version is None
+
+    @mark.parametrize(
+        ["description", "pause"],
+        [("description", False), ("description", True), ("description", False), ("description", True)],
+    )
+    def test_args_central(
+        self,
+        set_validated_config: Callable,
+        mock_request: Callable,
+        description: str,
+        pause: bool,
+        rulesets: Sequence[Ruleset],
+    ) -> None:
+        config = set_validated_config()
+        project_id, stage_id = uuid4(), uuid4()
+        response = StageResponse(
+            id=stage_id,
+            name=A_STAGE_NAME,
+            project_id=project_id,
+            description=description,
+            paused=pause,
+            version=0,
+            type=StageType.central,
+        )
+        matcher = mock_request(
+            RequestMethod.POST,
+            Routes.stages.format(project_id=project_id),
+            json=response.model_dump(mode="json"),
+        )
+        stage = create_stage(
+            project_id=project_id,
+            name=A_STAGE_NAME,
+            description=description,
+            pause=pause,
+            prioritzed_rulesets=rulesets,
+            config=config,
+        )
+        assert matcher.called
+        # Verify the config.
+        assert config.project_id == project_id
+        assert config.stage_id is not None
+        assert config.stage_id == stage_id
+        assert config.stage_name is not None
+        assert config.stage_name == A_STAGE_NAME
+        assert config.stage_version is not None
+        assert config.stage_version == 0
+        # Verify the HTTP response.
+        assert stage.id == stage_id
+        assert stage.type == StageType.central
+        assert stage.description == description
+        assert stage.paused == pause
+        assert stage.version == 0
+        assert stage.type == StageType.central
+
+    @mark.parametrize(
+        ["description", "pause"],
+        [("description", False), ("description", True), ("description", False), ("description", True)],
+    )
+    def test_config_central(
+        self,
+        set_validated_config: Callable,
+        mock_request: Callable,
+        description: str,
+        pause: bool,
+        rulesets: Sequence[Ruleset],
+    ) -> None:
+        project_id, stage_id = uuid4(), uuid4()
+        config = set_validated_config(project_id=project_id)
+        response = StageResponse(
+            id=stage_id,
+            name=A_STAGE_NAME,
+            project_id=project_id,
+            description=description,
+            paused=pause,
+            version=0,
+            type=StageType.central,
+        )
+        matcher = mock_request(
+            RequestMethod.POST,
+            Routes.stages.format(project_id=project_id),
+            json=response.model_dump(mode="json"),
+        )
+        stage = create_stage(
+            name=A_STAGE_NAME,
+            description=description,
+            pause=pause,
+            prioritzed_rulesets=rulesets,
+            config=config,
+        )
+        assert matcher.called
+        # Verify the config.
+        assert config.project_id == project_id
+        assert config.stage_id is not None
+        assert config.stage_id == stage_id
+        assert config.stage_name is not None
+        assert config.stage_name == A_STAGE_NAME
+        assert config.stage_version is not None
+        assert config.stage_version == 0
+        # Verify the HTTP response.
+        assert stage.id == stage_id
+        assert stage.type == StageType.central
+        assert stage.description == description
+        assert stage.paused == pause
+        assert stage.version == 0
+        assert stage.type == StageType.central
 
     def test_raises_missing_project_id(self, set_validated_config: Callable) -> None:
         config = set_validated_config()

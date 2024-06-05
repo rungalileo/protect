@@ -1,13 +1,14 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Sequence
 
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.helpers.project import get_project_from_name
+from galileo_core.schemas.protect.ruleset import Ruleset
+from galileo_core.schemas.protect.stage import StageType, StageWithRulesets
 from galileo_core.utils.name import ts_name
 from pydantic import UUID4
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
-from galileo_protect.schemas import Stage
 from galileo_protect.schemas.stage import StageResponse
 
 
@@ -16,10 +17,13 @@ def create_stage(
     name: Optional[str] = None,
     description: Optional[str] = None,
     pause: bool = False,
+    type: StageType = StageType.local,
+    prioritzed_rulesets: Optional[Sequence[Ruleset]] = None,
     config: Optional[ProtectConfig] = None,
 ) -> StageResponse:
     config = config or ProtectConfig.get()
     project_id = project_id or config.project_id
+    prioritzed_rulesets = prioritzed_rulesets or list()
     if project_id is None:
         raise ValueError("Project ID must be provided to create a stage.")
     name = name or ts_name("stage")
@@ -27,12 +31,22 @@ def create_stage(
         config.api_client.request(
             RequestMethod.POST,
             Routes.stages.format(project_id=project_id),
-            json=Stage(name=name, project_id=project_id, description=description, paused=pause).model_dump(mode="json"),
+            json=StageWithRulesets.model_validate(
+                dict(
+                    name=name,
+                    project_id=project_id,
+                    description=description,
+                    paused=pause,
+                    type=type,
+                    prioritzed_rulesets=prioritzed_rulesets,
+                )
+            ).model_dump(mode="json"),
         )
     )
     config.project_id = project_id
     config.stage_id = stage.id
     config.stage_name = stage.name
+    config.stage_version = stage.version
     config.write()
     return stage
 
