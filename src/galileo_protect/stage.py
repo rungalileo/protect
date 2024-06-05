@@ -2,7 +2,7 @@ from typing import Dict, Optional, Sequence
 
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.helpers.project import get_project_from_name
-from galileo_core.schemas.protect.ruleset import Ruleset
+from galileo_core.schemas.protect.ruleset import Ruleset, RulesetsMixin
 from galileo_core.schemas.protect.stage import StageType, StageWithRulesets
 from galileo_core.utils.name import ts_name
 from pydantic import UUID4
@@ -116,6 +116,8 @@ def get_stage(
     ------
     ValueError
         If the project ID is not provided or found.
+    ValueError
+        If the stage ID or name is not provided.
     """
     config = config or ProtectConfig.get()
     project_id = project_id or config.project_id
@@ -141,6 +143,75 @@ def get_stage(
     config.project_id = project_id
     config.stage_id = stage.id
     config.stage_name = stage.name
+    config.write()
+    return stage
+
+
+def update_stage(
+    project_id: Optional[UUID4] = None,
+    project_name: Optional[str] = None,
+    stage_id: Optional[UUID4] = None,
+    stage_name: Optional[str] = None,
+    prioritzed_rulesets: Optional[Sequence[Ruleset]] = None,
+    config: Optional[ProtectConfig] = None,
+) -> StageResponse:
+    """
+    Update a stage by ID or name to create a new version.
+
+    Only applicable for central stages. This will create a new version of the stage
+    with the provided rulesets.
+
+    Parameters
+    ----------
+    project_id : Optional[UUID4], optional
+        Project ID, by default we will try to get it from the config.
+    project_name : Optional[str], optional
+        Project name, by default we will try to get it from the server if the project
+        ID is not provided.
+    stage_id : Optional[UUID4], optional
+        Stage ID, by default we will try to get it from the config.
+    stage_name : Optional[str], optional
+        Stage name, by default we will try to get it from the config.
+    prioritzed_rulesets : Optional[Sequence[Ruleset]], optional
+        Prioritized rulesets, by default None.
+    config : Optional[ProtectConfig], optional
+        Protect config, by default we will get it from the env vars or the local
+        config file.
+
+    Returns
+    -------
+    StageResponse
+        The updated stage response.
+
+    Raises
+    ------
+    ValueError
+        If the project ID is not provided or found.
+    ValueError
+        If the stage ID is not provided or found.
+    """
+    config = config or ProtectConfig.get()
+    project_id = project_id or config.project_id
+    stage_id = stage_id or config.stage_id
+    stage_name = stage_name or config.stage_name
+    if project_id is None or stage_id is None:
+        got_stage = get_stage(
+            project_id=project_id, project_name=project_name, stage_id=stage_id, stage_name=stage_name, config=config
+        )
+        project_id = got_stage.project_id
+        stage_id = got_stage.id
+    prioritzed_rulesets = prioritzed_rulesets or list()
+    stage = StageResponse.model_validate(
+        config.api_client.request(
+            RequestMethod.POST,
+            Routes.stage.format(project_id=project_id, stage_id=stage_id),
+            json=RulesetsMixin.model_validate(dict(prioritzed_rulesets=prioritzed_rulesets)).model_dump(mode="json"),
+        )
+    )
+    config.project_id = project_id
+    config.stage_id = stage.id
+    config.stage_name = stage.name
+    config.stage_version = stage.version
     config.write()
     return stage
 
