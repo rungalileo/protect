@@ -17,7 +17,13 @@ from galileo_protect.schemas import (
     Ruleset,
     Stage,
 )
-from galileo_protect.stage import create_stage, get_stage, pause_stage, resume_stage
+from galileo_protect.stage import (
+    create_stage,
+    get_stage,
+    pause_stage,
+    resume_stage,
+    update_stage,
+)
 
 if is_dependency_available("langchain_core"):
     from galileo_protect.langchain import ProtectParser, ProtectTool
