@@ -7,7 +7,7 @@ from pytest import mark
 
 from galileo_protect.invoke import ainvoke, invoke
 from galileo_protect.langchain import ProtectTool
-from galileo_protect.schemas import Payload, Rule, RuleOperator, Ruleset
+from galileo_protect.schemas import Payload, Ruleset
 from tests.data import A_PROTECT_INPUT, A_STAGE_NAME
 
 
@@ -27,73 +27,6 @@ from tests.data import A_PROTECT_INPUT, A_STAGE_NAME
         Payload(input=A_PROTECT_INPUT),
         Payload(output=A_PROTECT_INPUT),
         Payload(input=A_PROTECT_INPUT, output=A_PROTECT_INPUT),
-    ],
-)
-@mark.parametrize(
-    "rulesets",
-    [
-        # Single ruleset with a single rule.
-        [
-            Ruleset(
-                rules=[
-                    Rule(
-                        metric="toxicity",
-                        operator=RuleOperator.gt,
-                        target_value=0.5,
-                    )
-                ]
-            )
-        ],
-        # Single ruleset with multiple rules.
-        [
-            Ruleset(
-                rules=[
-                    Rule(
-                        metric="toxicity",
-                        operator=RuleOperator.gt,
-                        target_value=0.5,
-                    ),
-                    Rule(
-                        metric="tone",
-                        operator=RuleOperator.lt,
-                        target_value=0.8,
-                    ),
-                ]
-            ),
-        ],
-        # Single ruleset with an unknown metric.
-        [
-            Ruleset(
-                rules=[
-                    Rule(
-                        metric="unknown",
-                        operator=RuleOperator.gt,
-                        target_value=0.5,
-                    )
-                ]
-            )
-        ],
-        # Multiple rulesets with a single rule each.
-        [
-            Ruleset(
-                rules=[
-                    Rule(
-                        metric="toxicity",
-                        operator=RuleOperator.gt,
-                        target_value=0.5,
-                    )
-                ]
-            ),
-            Ruleset(
-                rules=[
-                    Rule(
-                        metric="toxicity",
-                        operator=RuleOperator.lt,
-                        target_value=0.8,
-                    )
-                ]
-            ),
-        ],
     ],
 )
 @mark.parametrize("timeout", [5, 60])

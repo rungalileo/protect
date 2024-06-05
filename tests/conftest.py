@@ -1,12 +1,14 @@
 from pathlib import Path
-from typing import Callable, Generator, Optional
+from typing import Callable, Generator, List, Optional
 from unittest.mock import Mock, patch
 from uuid import UUID
 
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.constants.routes import Routes as CoreRoutes
 from galileo_core.schemas.protect.response import Response, TraceMetadata
-from pytest import MonkeyPatch, fixture
+from galileo_core.schemas.protect.rule import Rule, RuleOperator
+from galileo_core.schemas.protect.ruleset import Ruleset
+from pytest import FixtureRequest, MonkeyPatch, fixture
 
 from galileo_protect.constants.routes import Routes
 from galileo_protect.helpers.config import ProtectConfig
@@ -65,3 +67,73 @@ def mock_invoke(mock_request: Mock) -> Generator[None, None, None]:
     )
     yield matcher
     assert matcher.called
+
+
+@fixture(
+    params=[
+        # Single ruleset with a single rule.
+        [
+            Ruleset(
+                rules=[
+                    Rule(
+                        metric="toxicity",
+                        operator=RuleOperator.gt,
+                        target_value=0.5,
+                    )
+                ]
+            )
+        ],
+        # Single ruleset with multiple rules.
+        [
+            Ruleset(
+                rules=[
+                    Rule(
+                        metric="toxicity",
+                        operator=RuleOperator.gt,
+                        target_value=0.5,
+                    ),
+                    Rule(
+                        metric="tone",
+                        operator=RuleOperator.lt,
+                        target_value=0.8,
+                    ),
+                ]
+            ),
+        ],
+        # Single ruleset with an unknown metric.
+        [
+            Ruleset(
+                rules=[
+                    Rule(
+                        metric="unknown",
+                        operator=RuleOperator.gt,
+                        target_value=0.5,
+                    )
+                ]
+            )
+        ],
+        # Multiple rulesets with a single rule each.
+        [
+            Ruleset(
+                rules=[
+                    Rule(
+                        metric="toxicity",
+                        operator=RuleOperator.gt,
+                        target_value=0.5,
+                    )
+                ]
+            ),
+            Ruleset(
+                rules=[
+                    Rule(
+                        metric="toxicity",
+                        operator=RuleOperator.lt,
+                        target_value=0.8,
+                    )
+                ]
+            ),
+        ],
+    ],
+)
+def rulesets(request: FixtureRequest) -> List[Ruleset]:
+    return request.param
