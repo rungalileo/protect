@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import Dict, Optional
 
 from galileo_core.constants.request_method import RequestMethod
+from galileo_core.helpers.project import get_project_from_name
 from galileo_core.utils.name import ts_name
 from pydantic import UUID4
 
@@ -28,6 +29,69 @@ def create_stage(
             Routes.stages.format(project_id=project_id),
             json=Stage(name=name, project_id=project_id, description=description, paused=pause).model_dump(mode="json"),
         )
+    )
+    config.project_id = project_id
+    config.stage_id = stage.id
+    config.stage_name = stage.name
+    config.write()
+    return stage
+
+
+def get_stage(
+    project_id: Optional[UUID4] = None,
+    project_name: Optional[str] = None,
+    stage_id: Optional[UUID4] = None,
+    stage_name: Optional[str] = None,
+    config: Optional[ProtectConfig] = None,
+) -> StageResponse:
+    """
+    Get a stage by ID or name.
+
+    Parameters
+    ----------
+    project_id : Optional[UUID4], optional
+        Project ID, by default, we will try to get it from the config.
+    project_name : Optional[str], optional
+        Project name, by default we will try to get it from the server if the project
+        ID is not provided.
+    stage_id : Optional[UUID4], optional
+        Stage ID, by default we will try to get it from the config.
+    stage_name : Optional[str], optional
+        Stage name, by default we will try to get it from the config.
+    config : Optional[ProtectConfig], optional
+        Protect config, by default we will get it from the env vars or the local
+        config file.
+
+    Returns
+    -------
+    StageResponse
+        The stage response.
+
+    Raises
+    ------
+    ValueError
+        If the project ID is not provided or found.
+    """
+    config = config or ProtectConfig.get()
+    project_id = project_id or config.project_id
+    stage_id = stage_id or config.stage_id
+    stage_name = stage_name or config.stage_name
+    if project_id is None:
+        if project_name:
+            project = get_project_from_name(project_name, config=config, raise_if_missing=True)
+            assert project is not None, "Project should not be None."
+            project_id = project.id
+        else:
+            raise ValueError("Project ID or name must be provided to get a stage.")
+    params: Dict[str, str] = dict()
+    if stage_id:
+        params["stage_id"] = str(stage_id)
+    if stage_name:
+        params["stage_name"] = stage_name
+    if not params:
+        raise ValueError("Stage ID or name must be provided to get a stage.")
+    stage = StageResponse.model_validate(
+        config.api_client.request(RequestMethod.GET, Routes.stages.format(project_id=project_id), params=params)
     )
     config.project_id = project_id
     config.stage_id = stage.id
