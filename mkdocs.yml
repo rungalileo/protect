@@ -23,6 +23,7 @@ theme:
     primary: deep purple
     accent: purple
 copyright: Copyright &copy; 2024 Galileo Technologies, Inc.
+remote_branch: docs
 extra:
   generator: false
 
