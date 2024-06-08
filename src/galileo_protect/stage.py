@@ -125,7 +125,7 @@ def get_stage(
     stage_name = stage_name or config.stage_name
     if project_id is None:
         if project_name:
-            project = get_project_from_name(project_name, config=config, raise_if_missing=True)
+            project = get_project_from_name(config=config, project_name=project_name, raise_if_missing=True)
             assert project is not None, "Project should not be None."
             project_id = project.id
         else:
