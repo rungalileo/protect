@@ -25,7 +25,7 @@ pytest-cov = "^5.0.0"
 pytest-xdist = "^3.5.0"
 pytest-socket = "^0.7.0"
 pytest-asyncio = "^0.23.6"
-galileo-core = { extras = ["testing"], version = "^1.8.0" }
+galileo-core = { extras = ["testing"], version = "^1.9.0" }
 
 
 [tool.poetry.group.dev.dependencies]
