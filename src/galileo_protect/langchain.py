@@ -8,7 +8,7 @@ from pydantic.v1 import BaseModel as BaseModelV1
 
 from galileo_protect.constants.invoke import TIMEOUT
 from galileo_protect.helpers.config import ProtectConfig
-from galileo_protect.invoke import ainvoke, invoke
+from galileo_protect.invoker import ainvoke, invoke
 from galileo_protect.schemas import Payload, Ruleset
 
 
