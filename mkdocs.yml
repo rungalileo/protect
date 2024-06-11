@@ -40,11 +40,10 @@ plugins:
       handlers:
         python:
           options:
-            show_submodules: true
+            show_submodules: false
             show_source: false
             preload_modules:
               - galileo_core
-            filters: ["!__version__"]
             members: true
             members_order: source
             docstring_style: "numpy"

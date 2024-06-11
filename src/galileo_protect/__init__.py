@@ -3,7 +3,7 @@
 from galileo_core.helpers.dependencies import is_dependency_available
 from galileo_core.helpers.project import get_project
 
-from galileo_protect.invoke import ainvoke, invoke
+from galileo_protect.invocation import ainvoke, invoke
 from galileo_protect.project import create_project, get_projects
 from galileo_protect.schemas import (
     OverrideAction,
