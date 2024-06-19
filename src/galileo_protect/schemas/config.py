@@ -1,6 +1,6 @@
 from typing import Optional
 
-from galileo_core.helpers.config import GalileoConfig
+from galileo_core.schemas.config import GalileoConfig
 from pydantic import UUID4
 
 
