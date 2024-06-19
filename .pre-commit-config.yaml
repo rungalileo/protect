@@ -5,7 +5,6 @@ repos:
       - id: check-added-large-files
       - id: check-ast
       - id: check-json
-      - id: pretty-format-json
       - id: check-toml
       - id: check-yaml
       - id: debug-statements
