@@ -11,10 +11,10 @@ from galileo_core.schemas.core.project import (
 )
 from pydantic import UUID4
 
-from galileo_protect.helpers.config import ProtectConfig
+from galileo_protect.schemas.config import ProtectConfig
 
 
-def create_project(name: str = DEFAULT_PROJECT_NAME, config: Optional[ProtectConfig] = None) -> ProjectResponse:
+def create_project(name: str = DEFAULT_PROJECT_NAME) -> ProjectResponse:
     """
     Create a new Protect project.
 
@@ -22,46 +22,33 @@ def create_project(name: str = DEFAULT_PROJECT_NAME, config: Optional[ProtectCon
     ----------
     name : str, optional
         Name of the project, by default `project` with a timestamp.
-    config : Optional[ProtectConfig], optional
-        Protect config, by default it will be taken from the env vars or the local
-        config file.
 
     Returns
     -------
     ProjectResponse
         Project creation response.
     """
-    config = config or ProtectConfig.get()
-    project = core_create_project(config=config, request=CreateProjectRequest(name=name, type=ProjectType.protect))
+    config = ProtectConfig.get()
+    project = core_create_project(request=CreateProjectRequest(name=name, type=ProjectType.protect))
     config.project_id = project.id
     config.write()
     return project
 
 
-def get_projects(config: Optional[ProtectConfig] = None) -> List[ProjectResponse]:
+def get_projects() -> List[ProjectResponse]:
     """
     Get all Protect projects.
-
-    Parameters
-    ----------
-    config : Optional[ProtectConfig], optional
-        Protect config, by default it will be taken from the env vars or the local
-        config file.
 
     Returns
     -------
     List[ProjectResponse]
         List of Protect projects.
     """
-    config = config or ProtectConfig.get()
-    return core_get_projects(config=config, project_type=ProjectType.protect)
+    return core_get_projects(project_type=ProjectType.protect)
 
 
 def get_project(
-    project_id: Optional[UUID4] = None,
-    project_name: Optional[str] = None,
-    config: Optional[ProtectConfig] = None,
-    raise_if_missing: bool = True,
+    project_id: Optional[UUID4] = None, project_name: Optional[str] = None, raise_if_missing: bool = True
 ) -> Optional[ProjectResponse]:
     """
     Get a Protect project by either ID or name.
@@ -70,8 +57,6 @@ def get_project(
 
     Parameters
     ----------
-    config : GalileoConfig
-        Configuration object for the Galileo client.
     project_id : Optional[UUID4], optional
         Project ID, by default None.
     project_name : Optional[str], optional
@@ -89,9 +74,7 @@ def get_project(
     ValueError
         If neither project_id nor project_name is provided.
     """
-    config = config or ProtectConfig.get()
     return core_get_project(
-        config=config,
         project_id=project_id,
         project_name=project_name,
         project_type=ProjectType.protect,

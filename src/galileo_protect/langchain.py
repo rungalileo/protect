@@ -7,7 +7,6 @@ from pydantic import UUID4, BaseModel, ConfigDict, Field
 from pydantic.v1 import BaseModel as BaseModelV1
 
 from galileo_protect.constants.invoke import TIMEOUT
-from galileo_protect.helpers.config import ProtectConfig
 from galileo_protect.invocation import ainvoke, invoke
 from galileo_protect.schemas import Payload, Ruleset
 
@@ -33,7 +32,6 @@ class ProtectTool(BaseTool):
     stage_name: Optional[str] = None
     stage_id: Optional[UUID4] = None
     timeout: float = TIMEOUT
-    config: Optional[ProtectConfig] = None
 
     def _run(self, input: Optional[str] = None, output: Optional[str] = None) -> str:
         """
@@ -50,7 +48,6 @@ class ProtectTool(BaseTool):
             stage_name=self.stage_name,
             stage_id=self.stage_id,
             timeout=self.timeout,
-            config=self.config,
         ).model_dump_json()
 
     async def _arun(self, input: Optional[str] = None, output: Optional[str] = None) -> str:
@@ -68,7 +65,6 @@ class ProtectTool(BaseTool):
             stage_name=self.stage_name,
             stage_id=self.stage_id,
             timeout=self.timeout,
-            config=self.config,
         )
         return response.model_dump_json()
 
