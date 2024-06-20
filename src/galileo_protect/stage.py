@@ -8,7 +8,7 @@ from galileo_core.utils.name import ts_name
 from pydantic import UUID4
 
 from galileo_protect.constants.routes import Routes
-from galileo_protect.helpers.config import ProtectConfig
+from galileo_protect.schemas.config import Config
 from galileo_protect.schemas.stage import StageResponse
 
 
@@ -19,7 +19,6 @@ def create_stage(
     pause: bool = False,
     type: StageType = StageType.local,
     prioritzed_rulesets: Optional[Sequence[Ruleset]] = None,
-    config: Optional[ProtectConfig] = None,
 ) -> StageResponse:
     """
     Create a stage.
@@ -38,9 +37,6 @@ def create_stage(
         Stage type, by default StageType.local.
     prioritzed_rulesets : Optional[Sequence[Ruleset]], optional
         Prioritized rulesets, by default None.
-    config : Optional[ProtectConfig], optional
-        Protect config, by default it will be taken from the env vars or the local
-        config file.
 
     Returns
     -------
@@ -52,7 +48,7 @@ def create_stage(
     ValueError
         If the project ID is not provided or found.
     """
-    config = config or ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     prioritzed_rulesets = prioritzed_rulesets or list()
     if project_id is None:
@@ -87,7 +83,6 @@ def get_stage(
     project_name: Optional[str] = None,
     stage_id: Optional[UUID4] = None,
     stage_name: Optional[str] = None,
-    config: Optional[ProtectConfig] = None,
 ) -> StageResponse:
     """
     Get a stage by ID or name.
@@ -103,9 +98,6 @@ def get_stage(
         Stage ID, by default we will try to get it from the config.
     stage_name : Optional[str], optional
         Stage name, by default we will try to get it from the config.
-    config : Optional[ProtectConfig], optional
-        Protect config, by default we will get it from the env vars or the local
-        config file.
 
     Returns
     -------
@@ -119,13 +111,13 @@ def get_stage(
     ValueError
         If the stage ID or name is not provided.
     """
-    config = config or ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     stage_name = stage_name or config.stage_name
     if project_id is None:
         if project_name:
-            project = get_project_from_name(config=config, project_name=project_name, raise_if_missing=True)
+            project = get_project_from_name(project_name=project_name, raise_if_missing=True)
             assert project is not None, "Project should not be None."
             project_id = project.id
         else:
@@ -153,7 +145,6 @@ def update_stage(
     stage_id: Optional[UUID4] = None,
     stage_name: Optional[str] = None,
     prioritzed_rulesets: Optional[Sequence[Ruleset]] = None,
-    config: Optional[ProtectConfig] = None,
 ) -> StageResponse:
     """
     Update a stage by ID or name to create a new version.
@@ -174,9 +165,6 @@ def update_stage(
         Stage name, by default we will try to get it from the config.
     prioritzed_rulesets : Optional[Sequence[Ruleset]], optional
         Prioritized rulesets, by default None.
-    config : Optional[ProtectConfig], optional
-        Protect config, by default we will get it from the env vars or the local
-        config file.
 
     Returns
     -------
@@ -190,13 +178,13 @@ def update_stage(
     ValueError
         If the stage ID is not provided or found.
     """
-    config = config or ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     stage_name = stage_name or config.stage_name
     if project_id is None or stage_id is None:
         got_stage = get_stage(
-            project_id=project_id, project_name=project_name, stage_id=stage_id, stage_name=stage_name, config=config
+            project_id=project_id, project_name=project_name, stage_id=stage_id, stage_name=stage_name
         )
         project_id = got_stage.project_id
         stage_id = got_stage.id
@@ -216,9 +204,7 @@ def update_stage(
     return stage
 
 
-def pause_stage(
-    project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = None, config: Optional[ProtectConfig] = None
-) -> None:
+def pause_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = None) -> None:
     """
     Pause a stage.
 
@@ -230,9 +216,6 @@ def pause_stage(
         Project ID, by default None and will be taken from the config.
     stage_id : Optional[UUID4], optional
         Stage ID, by default None and will be taken from the config.
-    config : Optional[ProtectConfig], optional
-        Protect config, by default None and will be taken from the env vars or the local
-        config file.
 
     Returns
     -------
@@ -245,7 +228,7 @@ def pause_stage(
     ValueError
         If the stage ID is not provided or found.
     """
-    config = config or ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     if project_id is None:
@@ -262,10 +245,8 @@ def pause_stage(
     config.write()
 
 
-def resume_stage(
-    project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = None, config: Optional[ProtectConfig] = None
-) -> None:
-    config = config or ProtectConfig.get()
+def resume_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = None) -> None:
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     if project_id is None:

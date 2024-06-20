@@ -1,10 +1,10 @@
 from typing import Optional
 
-from galileo_core.helpers.config import GalileoConfig
+from galileo_core.schemas.base_config import BaseConfig
 from pydantic import UUID4
 
 
-class ProtectConfig(GalileoConfig):
+class Config(BaseConfig):
     # Config file for this project.
     config_filename: str = "protect-config.json"
 

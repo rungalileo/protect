@@ -11,7 +11,7 @@ from galileo_core.schemas.protect.ruleset import Ruleset
 from pytest import FixtureRequest, MonkeyPatch, fixture
 
 from galileo_protect.constants.routes import Routes
-from galileo_protect.helpers.config import ProtectConfig
+from galileo_protect.schemas.config import Config
 from tests.data import A_CONSOLE_URL, A_JWT_TOKEN, A_PROTECT_INPUT
 
 
@@ -22,9 +22,16 @@ def tmp_home_dir(monkeypatch: MonkeyPatch, tmp_path: Path) -> Generator[Path, No
     monkeypatch.delenv("HOME")
 
 
+@fixture
+def mock_get_current_user(mock_request: Mock) -> Generator[None, None, None]:
+    matcher = mock_request(RequestMethod.GET, CoreRoutes.current_user, json={"email": "user@example.com"})
+    yield
+    assert matcher.called
+
+
 @fixture(autouse=True)
 def mock_decode_jwt() -> Generator[Mock, None, None]:
-    with patch("galileo_core.helpers.config.jwt_decode") as _fixture:
+    with patch("galileo_core.schemas.base_config.jwt_decode") as _fixture:
         _fixture.return_value = dict(exp=float("inf"))
         yield _fixture
 
@@ -37,21 +44,19 @@ def mock_healthcheck(mock_request: Mock) -> Generator[None, None, None]:
 
 
 @fixture
-def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None) -> Callable:
+def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None, mock_get_current_user: Mock) -> Callable:
     def curry(
         project_id: Optional[UUID] = None,
         stage_id: Optional[UUID] = None,
         stage_name: Optional[str] = None,
-    ) -> ProtectConfig:
-        config = ProtectConfig(
+    ) -> Config:
+        return Config.set(
             console_url=A_CONSOLE_URL,
             jwt_token=A_JWT_TOKEN,
             project_id=project_id,
             stage_id=stage_id,
             stage_name=stage_name,
         )
-        config.write()
-        return config
 
     return curry
 

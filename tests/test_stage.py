@@ -43,13 +43,7 @@ class TestCreate:
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        stage = create_stage(
-            project_id=project_id,
-            name=A_STAGE_NAME,
-            description=description,
-            pause=pause,
-            config=config,
-        )
+        stage = create_stage(project_id=project_id, name=A_STAGE_NAME, description=description, pause=pause)
         assert matcher.called
         # Verify the config.
         assert config.project_id == project_id
@@ -85,12 +79,7 @@ class TestCreate:
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        stage = create_stage(
-            name=A_STAGE_NAME,
-            description=description,
-            pause=pause,
-            config=config,
-        )
+        stage = create_stage(name=A_STAGE_NAME, description=description, pause=pause)
         assert matcher.called
         # Verify the config.
         assert config.project_id == project_id
@@ -134,12 +123,7 @@ class TestCreate:
             json=response.model_dump(mode="json"),
         )
         stage = create_stage(
-            project_id=project_id,
-            name=A_STAGE_NAME,
-            description=description,
-            pause=pause,
-            prioritzed_rulesets=rulesets,
-            config=config,
+            project_id=project_id, name=A_STAGE_NAME, description=description, pause=pause, prioritzed_rulesets=rulesets
         )
         assert matcher.called
         # Verify the config.
@@ -186,13 +170,7 @@ class TestCreate:
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        stage = create_stage(
-            name=A_STAGE_NAME,
-            description=description,
-            pause=pause,
-            prioritzed_rulesets=rulesets,
-            config=config,
-        )
+        stage = create_stage(name=A_STAGE_NAME, description=description, pause=pause, prioritzed_rulesets=rulesets)
         assert matcher.called
         # Verify the config.
         assert config.project_id == project_id
@@ -211,9 +189,9 @@ class TestCreate:
         assert stage.type == StageType.central
 
     def test_raises_missing_project_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config()
+        set_validated_config()
         with raises(ValueError) as exc_info:
-            create_stage(config=config)
+            create_stage()
         assert str(exc_info.value) == "Project ID must be provided to create a stage."
 
 
@@ -234,7 +212,6 @@ class TestGet:
             project_id=project_id,
             stage_id=stage_id if include_stage_id else None,
             stage_name=A_STAGE_NAME if include_stage_name else None,
-            config=config,
         )
         assert matcher.called
         assert config.project_id == project_id
@@ -257,7 +234,7 @@ class TestGet:
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        get_stage(config=config)
+        get_stage()
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
@@ -287,7 +264,6 @@ class TestGet:
             project_name=A_PROJECT_NAME,
             stage_id=stage_id if include_stage_id else None,
             stage_name=A_STAGE_NAME if include_stage_name else None,
-            config=config,
         )
         assert matcher.called
         assert matcher_project.called
@@ -311,22 +287,22 @@ class TestGet:
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        get_stage(project_name=A_PROJECT_NAME, config=config)
+        get_stage(project_name=A_PROJECT_NAME)
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
         assert config.stage_name == A_STAGE_NAME
 
     def test_no_project_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config()
+        set_validated_config()
         with raises(ValueError) as exc_info:
-            get_stage(config=config)
+            get_stage()
         assert str(exc_info.value) == "Project ID or name must be provided to get a stage."
 
     def test_no_stage_id_or_name(self, set_validated_config: Callable) -> None:
-        config = set_validated_config(project_id=uuid4())
+        set_validated_config(project_id=uuid4())
         with raises(ValueError) as exc_info:
-            get_stage(config=config)
+            get_stage()
         assert str(exc_info.value) == "Stage ID or name must be provided to get a stage."
 
 
@@ -342,7 +318,7 @@ class TestUpdate:
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
             json=response.model_dump(mode="json"),
         )
-        stage = update_stage(project_id=project_id, stage_id=stage_id, prioritzed_rulesets=rulesets, config=config)
+        stage = update_stage(project_id=project_id, stage_id=stage_id, prioritzed_rulesets=rulesets)
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
@@ -354,15 +330,15 @@ class TestUpdate:
         assert stage.type == StageType.central
 
     def test_raises_missing_project_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config()
+        set_validated_config()
         with raises(ValueError) as exc_info:
-            update_stage(config=config)
+            update_stage()
         assert str(exc_info.value) == "Project ID or name must be provided to get a stage."
 
     def test_raises_missing_stage_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config(project_id=uuid4())
+        set_validated_config(project_id=uuid4())
         with raises(ValueError) as exc_info:
-            update_stage(config=config)
+            update_stage()
         assert str(exc_info.value) == "Stage ID or name must be provided to get a stage."
 
 
@@ -376,7 +352,10 @@ class TestPause:
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
             params={"pause": pause},
         )
-        pause_stage(project_id=project_id, stage_id=stage_id, config=config)
+        pause_stage(
+            project_id=project_id,
+            stage_id=stage_id,
+        )
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
@@ -392,21 +371,23 @@ class TestPause:
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
             params={"pause": pause},
         )
-        pause_stage(config=config)
+        pause_stage()
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
 
     def test_raises_missing_project_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config()
+        set_validated_config()
         with raises(ValueError) as exc_info:
-            pause_stage(config=config)
+            pause_stage()
         assert str(exc_info.value) == "Project ID must be provided to pause a stage."
 
     def test_raises_missing_stage_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config()
+        set_validated_config()
         with raises(ValueError) as exc_info:
-            pause_stage(project_id=uuid4(), config=config)
+            pause_stage(
+                project_id=uuid4(),
+            )
         assert str(exc_info.value) == "Stage ID must be provided to pause a stage."
 
 
@@ -420,7 +401,10 @@ class TestResume:
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
             params={"pause": pause},
         )
-        resume_stage(project_id=project_id, stage_id=stage_id, config=config)
+        resume_stage(
+            project_id=project_id,
+            stage_id=stage_id,
+        )
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
@@ -436,19 +420,19 @@ class TestResume:
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
             params={"pause": pause},
         )
-        resume_stage(config=config)
+        resume_stage()
         assert matcher.called
         assert config.project_id == project_id
         assert config.stage_id == stage_id
 
     def test_raises_missing_project_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config()
+        set_validated_config()
         with raises(ValueError) as exc_info:
-            pause_stage(config=config)
+            pause_stage()
         assert str(exc_info.value) == "Project ID must be provided to pause a stage."
 
     def test_raises_missing_stage_id(self, set_validated_config: Callable) -> None:
-        config = set_validated_config()
+        set_validated_config()
         with raises(ValueError) as exc_info:
-            pause_stage(project_id=uuid4(), config=config)
+            pause_stage(project_id=uuid4())
         assert str(exc_info.value) == "Stage ID must be provided to pause a stage."

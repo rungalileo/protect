@@ -60,7 +60,6 @@ class TestInvoke:
             timeout=timeout,
             metadata=metadata,
             headers=headers,
-            config=config,
         )
         assert isinstance(response, Response)
         assert response.text == A_PROTECT_INPUT
@@ -95,7 +94,6 @@ class TestInvoke:
             timeout=timeout,
             metadata=metadata,
             headers=headers,
-            config=config,
         )
         assert isinstance(response, Response)
         assert response.text == A_PROTECT_INPUT
@@ -125,7 +123,6 @@ class TestInvoke:
             stage_name=config.stage_name if include_stage_name else None,
             stage_id=config.stage_id if include_stage_id else None,
             timeout=timeout,
-            config=config,
             # Metadata and headers are not used by the tool since they conflict with the
             # langchain_core tool interface.
             # metadata=metadata,
