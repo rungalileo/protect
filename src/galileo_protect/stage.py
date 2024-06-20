@@ -8,7 +8,7 @@ from galileo_core.utils.name import ts_name
 from pydantic import UUID4
 
 from galileo_protect.constants.routes import Routes
-from galileo_protect.schemas.config import ProtectConfig
+from galileo_protect.schemas.config import Config
 from galileo_protect.schemas.stage import StageResponse
 
 
@@ -48,7 +48,7 @@ def create_stage(
     ValueError
         If the project ID is not provided or found.
     """
-    config = ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     prioritzed_rulesets = prioritzed_rulesets or list()
     if project_id is None:
@@ -111,7 +111,7 @@ def get_stage(
     ValueError
         If the stage ID or name is not provided.
     """
-    config = ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     stage_name = stage_name or config.stage_name
@@ -178,7 +178,7 @@ def update_stage(
     ValueError
         If the stage ID is not provided or found.
     """
-    config = ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     stage_name = stage_name or config.stage_name
@@ -228,7 +228,7 @@ def pause_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = 
     ValueError
         If the stage ID is not provided or found.
     """
-    config = ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     if project_id is None:
@@ -246,7 +246,7 @@ def pause_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = 
 
 
 def resume_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = None) -> None:
-    config = ProtectConfig.get()
+    config = Config.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     if project_id is None:

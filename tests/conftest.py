@@ -11,7 +11,7 @@ from galileo_core.schemas.protect.ruleset import Ruleset
 from pytest import FixtureRequest, MonkeyPatch, fixture
 
 from galileo_protect.constants.routes import Routes
-from galileo_protect.schemas.config import ProtectConfig
+from galileo_protect.schemas.config import Config
 from tests.data import A_CONSOLE_URL, A_JWT_TOKEN, A_PROTECT_INPUT
 
 
@@ -31,7 +31,7 @@ def mock_get_current_user(mock_request: Mock) -> Generator[None, None, None]:
 
 @fixture(autouse=True)
 def mock_decode_jwt() -> Generator[Mock, None, None]:
-    with patch("galileo_core.schemas.config.jwt_decode") as _fixture:
+    with patch("galileo_core.schemas.base_config.jwt_decode") as _fixture:
         _fixture.return_value = dict(exp=float("inf"))
         yield _fixture
 
@@ -49,8 +49,8 @@ def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None, mock_get_cu
         project_id: Optional[UUID] = None,
         stage_id: Optional[UUID] = None,
         stage_name: Optional[str] = None,
-    ) -> ProtectConfig:
-        return ProtectConfig.set(
+    ) -> Config:
+        return Config.set(
             console_url=A_CONSOLE_URL,
             jwt_token=A_JWT_TOKEN,
             project_id=project_id,

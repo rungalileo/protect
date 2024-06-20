@@ -11,7 +11,7 @@ from galileo_core.schemas.core.project import (
 )
 from pydantic import UUID4
 
-from galileo_protect.schemas.config import ProtectConfig
+from galileo_protect.schemas.config import Config
 
 
 def create_project(name: str = DEFAULT_PROJECT_NAME) -> ProjectResponse:
@@ -28,7 +28,7 @@ def create_project(name: str = DEFAULT_PROJECT_NAME) -> ProjectResponse:
     ProjectResponse
         Project creation response.
     """
-    config = ProtectConfig.get()
+    config = Config.get()
     project = core_create_project(request=CreateProjectRequest(name=name, type=ProjectType.protect))
     config.project_id = project.id
     config.write()

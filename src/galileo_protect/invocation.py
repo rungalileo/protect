@@ -8,7 +8,7 @@ from pydantic import UUID4
 from galileo_protect.constants.invoke import TIMEOUT, TIMEOUT_MARGIN
 from galileo_protect.constants.routes import Routes
 from galileo_protect.schemas import Payload, Request, Ruleset
-from galileo_protect.schemas.config import ProtectConfig
+from galileo_protect.schemas.config import Config
 
 
 async def ainvoke(
@@ -55,7 +55,7 @@ async def ainvoke(
     Response
         Response from the Protect API.
     """
-    config = ProtectConfig.get()
+    config = Config.get()
     response_json = await config.api_client.arequest(
         RequestMethod.POST,
         Routes.invoke,

@@ -16,6 +16,7 @@ from galileo_protect.schemas import (
     Ruleset,
     Stage,
 )
+from galileo_protect.schemas.config import Config
 from galileo_protect.stage import (
     create_stage,
     get_stage,
