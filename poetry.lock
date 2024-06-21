@@ -429,21 +429,6 @@ dev = ["black", "ipython", "mypy", "pdbpp", "pre-commit", "rich", "ruff"]
 test = ["pytest", "pytest-cov"]
 
 [[package]]
-name = "griffe-typingdoc"
-version = "0.2.5"
-description = "Griffe extension for PEP 727 – Documentation Metadata in Typing."
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "griffe_typingdoc-0.2.5-py3-none-any.whl", hash = "sha256:9de51529c46cc318b5920f999518f220a2b267d38568b7a62839020282aa2072"},
-    {file = "griffe_typingdoc-0.2.5.tar.gz", hash = "sha256:88d308ebd9ccbb6d7270356900b987fcc6b7854e7d461a970916397427b0f9a6"},
-]
-
-[package.dependencies]
-griffe = ">=0.38"
-typing-extensions = ">=4.7"
-
-[[package]]
 name = "h11"
 version = "0.14.0"
 description = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
@@ -1777,4 +1762,4 @@ langchain = ["langchain-core"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1,<3.13"
-content-hash = "459faf9c74971f88cc7badaf9cff002f09e0e56134ab1b1841d9f7e57db6aaf2"
+content-hash = "be595eaf6f02bdc5e7b785e459c29222ae748e16267de69e7a60ed1a8e17eeac"

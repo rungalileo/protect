@@ -58,5 +58,4 @@ plugins:
             merge_init_into_class: true
             separate_signature: true
             extensions:
-              - griffe_typingdoc
               - griffe_fieldz: { include_inherited: true }
