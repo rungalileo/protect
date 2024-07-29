@@ -28,8 +28,8 @@ class ProtectLLM(LLM):
 @mark.parametrize(
     ["output", "ignore_trigger", "expected_return", "expected_call_count"],
     [
-        [dumps({"text": "foo", **A_TRACE_METADATA_DICT}), False, "foo", 1],
-        [dumps({"text": "foo", **A_TRACE_METADATA_DICT}), True, "foo", 1],
+        [dumps({"text": "foo", "status": "NOT_TRIGGERED", **A_TRACE_METADATA_DICT}), False, "foo", 1],
+        [dumps({"text": "foo", "status": "NOT_TRIGGERED", **A_TRACE_METADATA_DICT}), True, "foo", 1],
         [dumps({"text": "timeout", "status": "TIMEOUT", **A_TRACE_METADATA_DICT}), False, "timeout", 1],
         [dumps({"text": "timeout", "status": "TIMEOUT", **A_TRACE_METADATA_DICT}), True, "timeout", 1],
         [dumps({"text": "success", "status": "SUCCESS", **A_TRACE_METADATA_DICT}), False, "success", 1],
@@ -49,6 +49,6 @@ def test_parser(output: str, ignore_trigger: bool, expected_return: str, expecte
 @mark.parametrize(["echo_output", "expected_output"], [[True, "> Raw response: foo\n"], [False, ""]])
 def test_echo(echo_output: bool, expected_output: str, capsys: CaptureFixture) -> None:
     parser = ProtectParser(chain=ProtectLLM(), echo_output=echo_output)
-    parser.parser(dumps({"text": "foo", **A_TRACE_METADATA_DICT}))
+    parser.parser(dumps({"text": "foo", "status": "NOT_TRIGGERED", **A_TRACE_METADATA_DICT}))
     captured = capsys.readouterr()
     assert captured.out == expected_output
