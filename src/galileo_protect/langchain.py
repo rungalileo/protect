@@ -1,5 +1,6 @@
 from typing import Optional, Sequence, Type
 
+from galileo_core.schemas.protect.execution_status import ExecutionStatus
 from galileo_core.schemas.protect.response import Response
 from langchain_core.runnables.base import Runnable
 from langchain_core.tools import BaseTool
@@ -87,7 +88,7 @@ class ProtectParser(BaseModel):
         text = response.text
         if self.echo_output:
             print(f"> Raw response: {text}")
-        if response.status == "TRIGGERED" and not self.ignore_trigger:
+        if response.status == ExecutionStatus.triggered and not self.ignore_trigger:
             return text
         else:
             return self.chain.invoke(text)

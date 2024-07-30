@@ -4,7 +4,7 @@ from uuid import uuid4
 
 from galileo_core.schemas.protect.response import Response
 from pytest import mark
-
+from galileo_core.schemas.protect.execution_status import ExecutionStatus
 from galileo_protect.invocation import ainvoke, invoke
 from galileo_protect.langchain import ProtectTool
 from galileo_protect.schemas import Payload, Ruleset
@@ -132,5 +132,5 @@ class TestInvoke:
         assert isinstance(response_json, str)
         response = Response.model_validate_json(response_json)
         assert response.text is not None
-        assert response.status == "NOT_TRIGGERED"
+        assert response.status == ExecutionStatus.not_triggered
         assert mock_invoke.called
