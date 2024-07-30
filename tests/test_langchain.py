@@ -2,11 +2,11 @@ from json import dumps
 from typing import Any, List, Optional
 from unittest.mock import patch
 
-from galileo_protect.langchain import ProtectParser
 from langchain_core.callbacks import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 from pytest import CaptureFixture, mark
 
+from galileo_protect.langchain import ProtectParser
 from tests.data import A_TRACE_METADATA_DICT
 
 
@@ -70,9 +70,7 @@ def test_parser(output: str, ignore_trigger: bool, expected_return: str, expecte
 
 @mark.parametrize(["echo_output", "expected_output"], [[True, "> Raw response: foo\n"], [False, ""]])
 def test_echo(echo_output: bool, expected_output: str, capsys: CaptureFixture) -> None:
-    """
-    Verify that the ProtectParser echoes the output if echo_output is True.
-    """
+    """Verify that the ProtectParser echoes the output if echo_output is True."""
     parser = ProtectParser(chain=ProtectLLM(), echo_output=echo_output)
     parser.parser(dumps({"text": "foo", "status": "NOT_TRIGGERED", **A_TRACE_METADATA_DICT}))
     captured = capsys.readouterr()
