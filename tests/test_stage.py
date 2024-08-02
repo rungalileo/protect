@@ -1,3 +1,4 @@
+from json import loads
 from typing import Callable, List, Union
 from uuid import uuid4
 
@@ -108,6 +109,7 @@ class TestCreate:
     ) -> None:
         config = set_validated_config()
         project_id, stage_id = uuid4(), uuid4()
+        stage_type = StageType.central
         response = StageResponse(
             id=stage_id,
             name=A_STAGE_NAME,
@@ -115,7 +117,7 @@ class TestCreate:
             description=description,
             paused=pause,
             version=0,
-            type=StageType.central,
+            type=stage_type,
         )
         matcher = mock_request(
             RequestMethod.POST,
@@ -123,9 +125,15 @@ class TestCreate:
             json=response.model_dump(mode="json"),
         )
         stage = create_stage(
-            project_id=project_id, name=A_STAGE_NAME, description=description, pause=pause, prioritzed_rulesets=rulesets
+            project_id=project_id,
+            name=A_STAGE_NAME,
+            description=description,
+            pause=pause,
+            type=stage_type,
+            prioritized_rulesets=rulesets,
         )
         assert matcher.called
+        assert loads(matcher.calls.last.request.content)["rulesets"] == [ruleset.model_dump() for ruleset in rulesets]
         # Verify the config.
         assert config.project_id == project_id
         assert config.stage_id is not None
@@ -155,6 +163,7 @@ class TestCreate:
         rulesets: List[Ruleset],
     ) -> None:
         project_id, stage_id = uuid4(), uuid4()
+        stage_type = StageType.central
         config = set_validated_config(project_id=project_id)
         response = StageResponse(
             id=stage_id,
@@ -163,15 +172,18 @@ class TestCreate:
             description=description,
             paused=pause,
             version=0,
-            type=StageType.central,
+            type=stage_type,
         )
         matcher = mock_request(
             RequestMethod.POST,
             Routes.stages.format(project_id=project_id),
             json=response.model_dump(mode="json"),
         )
-        stage = create_stage(name=A_STAGE_NAME, description=description, pause=pause, prioritzed_rulesets=rulesets)
+        stage = create_stage(
+            name=A_STAGE_NAME, description=description, pause=pause, prioritized_rulesets=rulesets, type=stage_type
+        )
         assert matcher.called
+        assert loads(matcher.calls.last.request.content)["rulesets"] == [ruleset.model_dump() for ruleset in rulesets]
         # Verify the config.
         assert config.project_id == project_id
         assert config.stage_id is not None

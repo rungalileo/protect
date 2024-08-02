@@ -18,7 +18,7 @@ def create_stage(
     description: Optional[str] = None,
     pause: bool = False,
     type: StageType = StageType.local,
-    prioritzed_rulesets: Optional[Sequence[Ruleset]] = None,
+    prioritized_rulesets: Optional[Sequence[Ruleset]] = None,
 ) -> StageResponse:
     """
     Create a stage.
@@ -50,7 +50,7 @@ def create_stage(
     """
     config = Config.get()
     project_id = project_id or config.project_id
-    prioritzed_rulesets = prioritzed_rulesets or list()
+    prioritzed_rulesets = prioritized_rulesets or list()
     if project_id is None:
         raise ValueError("Project ID must be provided to create a stage.")
     name = name or ts_name("stage")
@@ -65,7 +65,7 @@ def create_stage(
                     description=description,
                     paused=pause,
                     type=type,
-                    prioritzed_rulesets=prioritzed_rulesets,
+                    prioritized_rulesets=prioritzed_rulesets,
                 )
             ).model_dump(mode="json"),
         )
