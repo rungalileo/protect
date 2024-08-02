@@ -133,7 +133,11 @@ class TestCreate:
             prioritized_rulesets=rulesets,
         )
         assert matcher.called
-        assert loads(matcher.calls.last.request.content)["rulesets"] == [ruleset.model_dump() for ruleset in rulesets]
+        request_content = loads(matcher.calls.last.request.content)
+        assert request_content["name"] == A_STAGE_NAME
+        assert request_content["description"] == description
+        assert request_content["type"] == stage_type
+        assert request_content["rulesets"] == [ruleset.model_dump() for ruleset in rulesets]
         # Verify the config.
         assert config.project_id == project_id
         assert config.stage_id is not None
@@ -183,7 +187,11 @@ class TestCreate:
             name=A_STAGE_NAME, description=description, pause=pause, prioritized_rulesets=rulesets, type=stage_type
         )
         assert matcher.called
-        assert loads(matcher.calls.last.request.content)["rulesets"] == [ruleset.model_dump() for ruleset in rulesets]
+        request_content = loads(matcher.calls.last.request.content)
+        assert request_content["name"] == A_STAGE_NAME
+        assert request_content["description"] == description
+        assert request_content["type"] == stage_type
+        assert request_content["rulesets"] == [ruleset.model_dump() for ruleset in rulesets]
         # Verify the config.
         assert config.project_id == project_id
         assert config.stage_id is not None
@@ -330,8 +338,10 @@ class TestUpdate:
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
             json=response.model_dump(mode="json"),
         )
-        stage = update_stage(project_id=project_id, stage_id=stage_id, prioritzed_rulesets=rulesets)
+        stage = update_stage(project_id=project_id, stage_id=stage_id, prioritized_rulesets=rulesets)
         assert matcher.called
+        request_content = loads(matcher.calls.last.request.content)
+        assert request_content["rulesets"] == [ruleset.model_dump() for ruleset in rulesets]
         assert config.project_id == project_id
         assert config.stage_id == stage_id
         assert config.stage_name == A_STAGE_NAME

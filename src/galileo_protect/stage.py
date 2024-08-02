@@ -35,7 +35,7 @@ def create_stage(
         Pause the stage, by default False, i.e. the stage is not paused.
     type : StageType, optional
         Stage type, by default StageType.local.
-    prioritzed_rulesets : Optional[Sequence[Ruleset]], optional
+    prioritized_rulesets : Optional[Sequence[Ruleset]], optional
         Prioritized rulesets, by default None.
 
     Returns
@@ -50,7 +50,7 @@ def create_stage(
     """
     config = Config.get()
     project_id = project_id or config.project_id
-    prioritzed_rulesets = prioritized_rulesets or list()
+    prioritized_rulesets = prioritized_rulesets or list()
     if project_id is None:
         raise ValueError("Project ID must be provided to create a stage.")
     name = name or ts_name("stage")
@@ -65,7 +65,7 @@ def create_stage(
                     description=description,
                     paused=pause,
                     type=type,
-                    prioritized_rulesets=prioritzed_rulesets,
+                    prioritized_rulesets=prioritized_rulesets,
                 )
             ).model_dump(mode="json"),
         )
@@ -144,7 +144,7 @@ def update_stage(
     project_name: Optional[str] = None,
     stage_id: Optional[UUID4] = None,
     stage_name: Optional[str] = None,
-    prioritzed_rulesets: Optional[Sequence[Ruleset]] = None,
+    prioritized_rulesets: Optional[Sequence[Ruleset]] = None,
 ) -> StageResponse:
     """
     Update a stage by ID or name to create a new version.
@@ -163,7 +163,7 @@ def update_stage(
         Stage ID, by default we will try to get it from the config.
     stage_name : Optional[str], optional
         Stage name, by default we will try to get it from the config.
-    prioritzed_rulesets : Optional[Sequence[Ruleset]], optional
+    prioritized_rulesets : Optional[Sequence[Ruleset]], optional
         Prioritized rulesets, by default None.
 
     Returns
@@ -188,12 +188,12 @@ def update_stage(
         )
         project_id = got_stage.project_id
         stage_id = got_stage.id
-    prioritzed_rulesets = prioritzed_rulesets or list()
+    prioritized_rulesets = prioritized_rulesets or list()
     stage = StageResponse.model_validate(
         config.api_client.request(
             RequestMethod.POST,
             Routes.stage.format(project_id=project_id, stage_id=stage_id),
-            json=RulesetsMixin.model_validate(dict(prioritzed_rulesets=prioritzed_rulesets)).model_dump(mode="json"),
+            json=RulesetsMixin.model_validate(dict(prioritized_rulesets=prioritized_rulesets)).model_dump(mode="json"),
         )
     )
     config.project_id = project_id
