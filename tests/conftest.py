@@ -3,13 +3,13 @@ from typing import Callable, Generator, List, Optional
 from unittest.mock import Mock, patch
 from uuid import UUID
 
+from pytest import FixtureRequest, MonkeyPatch, fixture
+
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.constants.routes import Routes as CoreRoutes
 from galileo_core.schemas.protect.response import Response, TraceMetadata
 from galileo_core.schemas.protect.rule import Rule, RuleOperator
 from galileo_core.schemas.protect.ruleset import Ruleset
-from pytest import FixtureRequest, MonkeyPatch, fixture
-
 from galileo_protect.constants.routes import Routes
 from galileo_protect.schemas.config import Config
 from tests.data import A_CONSOLE_URL, A_JWT_TOKEN, A_PROTECT_INPUT

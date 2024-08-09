@@ -1,7 +1,8 @@
 from typing import Optional
 
-from galileo_core.schemas.base_config import BaseConfig
 from pydantic import UUID4
+
+from galileo_core.schemas.base_config import BaseConfig
 
 
 class Config(BaseConfig):
