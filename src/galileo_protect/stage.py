@@ -1,12 +1,12 @@
 from typing import Dict, Optional, Sequence
 
+from pydantic import UUID4
+
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.helpers.project import get_project_from_name
 from galileo_core.schemas.protect.ruleset import Ruleset, RulesetsMixin
 from galileo_core.schemas.protect.stage import StageType, StageWithRulesets
 from galileo_core.utils.name import ts_name
-from pydantic import UUID4
-
 from galileo_protect.constants.routes import Routes
 from galileo_protect.schemas.config import Config
 from galileo_protect.schemas.stage import StageResponse

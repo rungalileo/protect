@@ -1,5 +1,7 @@
 from typing import List, Optional
 
+from pydantic import UUID4
+
 from galileo_core.helpers.project import create_project as core_create_project
 from galileo_core.helpers.project import get_project as core_get_project
 from galileo_core.helpers.project import get_projects as core_get_projects
@@ -9,8 +11,6 @@ from galileo_core.schemas.core.project import (
     ProjectResponse,
     ProjectType,
 )
-from pydantic import UUID4
-
 from galileo_protect.schemas.config import Config
 
 

@@ -1,7 +1,8 @@
 from typing import Optional
 
-from galileo_core.schemas.protect.stage import Stage
 from pydantic import UUID4
+
+from galileo_core.schemas.protect.stage import Stage
 
 
 class StageResponse(Stage):

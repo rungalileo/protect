@@ -2,13 +2,13 @@ from json import loads
 from typing import Callable, List, Union
 from uuid import uuid4
 
+from pytest import mark, raises
+
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.constants.routes import Routes as CoreRoutes
 from galileo_core.schemas.core.project import ProjectResponse, ProjectType
 from galileo_core.schemas.protect.ruleset import Ruleset
 from galileo_core.schemas.protect.stage import StageType
-from pytest import mark, raises
-
 from galileo_protect.constants.routes import Routes
 from galileo_protect.schemas.stage import StageResponse
 from galileo_protect.stage import (
