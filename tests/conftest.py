@@ -1,12 +1,14 @@
 from pathlib import Path
 from typing import Callable, Generator, List, Optional
 from unittest.mock import Mock, patch
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from pytest import FixtureRequest, MonkeyPatch, fixture
 
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.constants.routes import Routes as CoreRoutes
+from galileo_core.schemas.core.user import User
+from galileo_core.schemas.core.user_role import UserRole
 from galileo_core.schemas.protect.response import Response, TraceMetadata
 from galileo_core.schemas.protect.rule import Rule, RuleOperator
 from galileo_core.schemas.protect.ruleset import Ruleset
@@ -24,7 +26,13 @@ def tmp_home_dir(monkeypatch: MonkeyPatch, tmp_path: Path) -> Generator[Path, No
 
 @fixture
 def mock_get_current_user(mock_request: Mock) -> Generator[None, None, None]:
-    matcher = mock_request(RequestMethod.GET, CoreRoutes.current_user, json={"email": "user@example.com"})
+    matcher = mock_request(
+        RequestMethod.GET,
+        CoreRoutes.current_user,
+        json=User.model_validate({"id": uuid4(), "email": "user@example.com", "role": UserRole.user}).model_dump(
+            mode="json"
+        ),
+    )
     yield
     assert matcher.called
 
