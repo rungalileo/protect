@@ -376,13 +376,13 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "galileo-core"
-version = "2.11.1"
+version = "2.12.1"
 description = "Shared schemas and configuration for Galileo's Python packages."
 optional = false
 python-versions = "<3.13,>=3.8.1"
 files = [
-    {file = "galileo_core-2.11.1-py3-none-any.whl", hash = "sha256:95f085de5a51b40093f6cfb99780cbd57acbb6d756a8543c06e4d5f9ca9a7500"},
-    {file = "galileo_core-2.11.1.tar.gz", hash = "sha256:deda26a407522c380d7797b3321ecb6dc79dbfeb1c39e050c3c2e5c22b1eabbf"},
+    {file = "galileo_core-2.12.1-py3-none-any.whl", hash = "sha256:ee64b0375b8204f2ef6caa8d2b433b4a32b3a3f527b5fbf14f586ae32c3d57d2"},
+    {file = "galileo_core-2.12.1.tar.gz", hash = "sha256:b93378f713e6c1dbfdd56c2ff3bda7590111d14750059ecfbb3c38973ce95503"},
 ]
 
 [package.dependencies]
