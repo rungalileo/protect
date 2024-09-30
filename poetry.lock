@@ -376,18 +376,17 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "galileo-core"
-version = "2.13.0"
+version = "2.14.0"
 description = "Shared schemas and configuration for Galileo's Python packages."
 optional = false
 python-versions = "<3.13,>=3.8.1"
 files = [
-    {file = "galileo_core-2.13.0-py3-none-any.whl", hash = "sha256:bfc3daed2e543d08b811d802d185b2b410f6927f45c0095f0755cec3fec3362c"},
-    {file = "galileo_core-2.13.0.tar.gz", hash = "sha256:0a46a26b1cf0d3e26a1e626a26ee839c0f21571b711e98e460b728158a7e6932"},
+    {file = "galileo_core-2.14.0-py3-none-any.whl", hash = "sha256:15f8507ac22d9b9609bab68d032658a56d0fecc66b6e04d43d8509bcf283c84d"},
+    {file = "galileo_core-2.14.0.tar.gz", hash = "sha256:db618daa2f3c1a464621ad6f8c38264dee426582b5e15473a0d53daba2a140b0"},
 ]
 
 [package.dependencies]
 httpx = ">=0.27.0,<0.28.0"
-importlib-metadata = ">=7,<9"
 pydantic = ">=2.6.0,<3.0.0"
 pydantic-settings = ">=2.2.1,<3.0.0"
 pyjwt = ">=2.8.0,<3.0.0"
