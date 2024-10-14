@@ -46,17 +46,18 @@ repos:
       - id: python-check-blanket-type-ignore
       - id: python-check-mock-methods
       - id: python-no-log-warn
-  - repo: https://github.com/PyCQA/docformatter
-    rev: v1.7.5
-    hooks:
-      - id: docformatter
-        additional_dependencies: [tomli]
-        args:
-          [
-            "--pre-summary-newline",
-            "--in-place",
-            "--config",
-            "./pyproject.toml",
-          ]
+  # Disabling until https://github.com/PyCQA/docformatter/pull/287 is released.
+  # - repo: https://github.com/PyCQA/docformatter
+  #   rev: v1.7.5
+  #   hooks:
+  #     - id: docformatter
+  #       additional_dependencies: [tomli]
+  #       args:
+  #         [
+  #           "--pre-summary-newline",
+  #           "--in-place",
+  #           "--config",
+  #           "./pyproject.toml",
+  # ]
 
 exclude: "CHANGELOG.md"
