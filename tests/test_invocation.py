@@ -9,17 +9,22 @@ from galileo_core.schemas.protect.response import Response
 from galileo_protect.invocation import ainvoke, invoke
 from galileo_protect.langchain import ProtectTool
 from galileo_protect.schemas import Payload, Ruleset
-from tests.data import A_PROTECT_INPUT, A_STAGE_NAME
+from tests.data import A_PROJECT_NAME, A_PROTECT_INPUT, A_STAGE_NAME
 
 
 @mark.parametrize(
-    ["include_project_id", "include_stage_name", "include_stage_id"],
+    ["include_project_id", "include_project_name", "include_stage_name", "include_stage_id"],
     [
-        (True, True, True),
-        (False, True, True),
-        (True, False, True),
-        (True, True, False),
-        (False, False, True),
+        (True, True, True, True),
+        (True, False, True, True),
+        (False, True, True, True),
+        (False, False, True, True),
+        (True, True, False, True),
+        (True, False, False, True),
+        (True, True, True, False),
+        (True, False, True, False),
+        (False, True, False, True),
+        (False, False, False, True),
     ],
 )
 @mark.parametrize(
@@ -39,6 +44,7 @@ class TestInvoke:
         mock_invoke: Mock,
         set_validated_config: Callable,
         include_project_id: bool,
+        include_project_name: bool,
         include_stage_name: bool,
         include_stage_id: bool,
         payload: Payload,
@@ -49,8 +55,9 @@ class TestInvoke:
     ) -> None:
         config = set_validated_config(
             project_id=uuid4() if include_project_id else None,
-            stage_name=A_STAGE_NAME if include_stage_name else None,
+            project_name=A_PROJECT_NAME if include_project_name else None,
             stage_id=uuid4() if include_stage_id else None,
+            stage_name=A_STAGE_NAME if include_stage_name else None,
         )
         response = invoke(
             payload=payload,
@@ -72,6 +79,7 @@ class TestInvoke:
         mock_invoke: Mock,
         set_validated_config: Callable,
         include_project_id: bool,
+        include_project_name: bool,
         include_stage_name: bool,
         include_stage_id: bool,
         payload: Payload,
@@ -83,8 +91,9 @@ class TestInvoke:
         payload = Payload(input=A_PROTECT_INPUT)
         config = set_validated_config(
             project_id=uuid4() if include_project_id else None,
-            stage_name=A_STAGE_NAME if include_stage_name else None,
+            project_name=A_PROJECT_NAME if include_project_name else None,
             stage_id=uuid4() if include_stage_id else None,
+            stage_name=A_STAGE_NAME if include_stage_name else None,
         )
         response = await ainvoke(
             payload=payload,
@@ -105,6 +114,7 @@ class TestInvoke:
         mock_invoke: Mock,
         set_validated_config: Callable,
         include_project_id: bool,
+        include_project_name: bool,
         include_stage_name: bool,
         include_stage_id: bool,
         payload: Payload,
@@ -115,8 +125,9 @@ class TestInvoke:
     ) -> None:
         config = set_validated_config(
             project_id=uuid4() if include_project_id else None,
-            stage_name=A_STAGE_NAME if include_stage_name else None,
+            project_name=A_PROJECT_NAME if include_project_name else None,
             stage_id=uuid4() if include_stage_id else None,
+            stage_name=A_STAGE_NAME if include_stage_name else None,
         )
         tool = ProtectTool(
             prioritized_rulesets=rulesets,

@@ -15,8 +15,9 @@ async def ainvoke(
     payload: Payload,
     prioritized_rulesets: Optional[Sequence[Ruleset]] = None,
     project_id: Optional[UUID4] = None,
-    stage_name: Optional[str] = None,
+    project_name: Optional[str] = None,
     stage_id: Optional[UUID4] = None,
+    stage_name: Optional[str] = None,
     timeout: float = TIMEOUT,
     metadata: Optional[Dict[str, str]] = None,
     headers: Optional[Dict[str, str]] = None,
@@ -39,10 +40,12 @@ async def ainvoke(
         using a local stage, by default None, i.e. empty list.
     project_id : Optional[UUID4], optional
         Project ID to be used for processing, by default None.
-    stage_name : Optional[str], optional
-        Stage name to be used for processing, by default None.
+    project_name : Optional[str], optional
+        Project name to be used for processing, by default None.
     stage_id : Optional[UUID4], optional
         Stage ID to be used for processing, by default None.
+    stage_name : Optional[str], optional
+        Stage name to be used for processing, by default None.
     timeout : float, optional
         Timeout for the request, by default 10 seconds.
     metadata : Optional[Dict[str, str]], optional
@@ -63,6 +66,7 @@ async def ainvoke(
             payload=payload,
             rulesets=prioritized_rulesets or [],
             project_id=project_id or config.project_id,
+            project_name=project_name,
             stage_name=stage_name or config.stage_name,
             stage_id=stage_id or config.stage_id,
             timeout=timeout,
@@ -79,8 +83,9 @@ def invoke(
     payload: Payload,
     prioritized_rulesets: Optional[Sequence[Ruleset]] = None,
     project_id: Optional[UUID4] = None,
-    stage_name: Optional[str] = None,
+    project_name: Optional[str] = None,
     stage_id: Optional[UUID4] = None,
+    stage_name: Optional[str] = None,
     timeout: float = TIMEOUT,
     metadata: Optional[Dict[str, str]] = None,
     headers: Optional[Dict[str, str]] = None,
@@ -103,10 +108,12 @@ def invoke(
         using a local stage, by default None, i.e. empty list.
     project_id : Optional[UUID4], optional
         Project ID to be used for processing, by default None.
-    stage_name : Optional[str], optional
-        Stage name to be used for processing, by default None.
+    project_name : Optional[str], optional
+        Project name to be used for processing, by default None.
     stage_id : Optional[UUID4], optional
         Stage ID to be used for processing, by default None.
+    stage_name : Optional[str], optional
+        Stage name to be used for processing, by default None.
     timeout : float, optional
         Timeout for the request, by default 10 seconds.
     metadata : Optional[Dict[str, str]], optional
@@ -124,8 +131,9 @@ def invoke(
             payload=payload,
             prioritized_rulesets=prioritized_rulesets,
             project_id=project_id,
-            stage_name=stage_name,
+            project_name=project_name,
             stage_id=stage_id,
+            stage_name=stage_name,
             timeout=timeout,
             metadata=metadata,
             headers=headers,

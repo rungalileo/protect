@@ -55,6 +55,7 @@ def mock_healthcheck(mock_request: Mock) -> Generator[None, None, None]:
 def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None, mock_get_current_user: Mock) -> Callable:
     def curry(
         project_id: Optional[UUID] = None,
+        project_name: Optional[str] = None,
         stage_id: Optional[UUID] = None,
         stage_name: Optional[str] = None,
     ) -> Config:
@@ -62,6 +63,7 @@ def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None, mock_get_cu
             console_url=A_CONSOLE_URL,
             jwt_token=A_JWT_TOKEN,
             project_id=project_id,
+            project_name=project_name,
             stage_id=stage_id,
             stage_name=stage_name,
         )
