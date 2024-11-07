@@ -1,24 +1,137 @@
 # CHANGELOG
 
+
+## v0.15.0 (2024-11-07)
+
+### Chores
+
+* chore(deps): bump langchain-core from 0.2.41 to 0.2.43 (#139) ([`1626151`](https://github.com/rungalileo/protect/commit/162615136e5228125d4c91114980454d06701717))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.42 to 9.5.43 (#138) ([`f81db22`](https://github.com/rungalileo/protect/commit/f81db2205ccbbdbd58cc9914771aa65722c2a382))
+
+* chore(deps): bump galileo-core from 2.17.0 to 2.20.0 (#137) ([`550627c`](https://github.com/rungalileo/protect/commit/550627c49d6bb05c1ae06970792301167e4ab0ed))
+
+* chore(deps): bump codecov/codecov-action from 4.5.0 to 4.6.0 (#136) ([`4980136`](https://github.com/rungalileo/protect/commit/49801369ce0e8d51dc0ebbf9a3296e4f105a06c1))
+
+* chore(deps): bump python-semantic-release/python-semantic-release from 9.9.0 to 9.12.0 (#135) ([`7a121af`](https://github.com/rungalileo/protect/commit/7a121aff0824bb8b62b149a81cfba8b22839c1ea))
+
+* chore(deps): Bump `galileo-core` to v2.17.0 to allow skipping SSL validation (#133) ([`bae80dd`](https://github.com/rungalileo/protect/commit/bae80dd2f7da805d152e999b3eec2c620ea55fc1))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.40 to 9.5.42 (#132) ([`ed9140f`](https://github.com/rungalileo/protect/commit/ed9140f70bb47f85bdd3dbb2208023645e5d67e9))
+
+* chore(deps): bump galileo-core from 2.15.0 to 2.16.0 (#130) ([`dccebdf`](https://github.com/rungalileo/protect/commit/dccebdf2fc830e9a360b3afe8b59268aa0f0c34c))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.39 to 9.5.40 (#129) ([`829db1d`](https://github.com/rungalileo/protect/commit/829db1dbb1f5a7bac64487d2f491b81c360aaf17))
+
+* chore(deps): bump galileo-core from 2.14.0 to 2.15.0 (#128) ([`8d1e109`](https://github.com/rungalileo/protect/commit/8d1e109d6bc48b35856e15cb483b748b017fcead))
+
+* chore: Set code owner to Protect team (#126) ([`4286896`](https://github.com/rungalileo/protect/commit/42868967586a824bad00ef7d5b0207ef1ec37676))
+
+* chore(deps): bump python-semantic-release/python-semantic-release from 9.8.7 to 9.9.0 (#127) ([`f57c0c9`](https://github.com/rungalileo/protect/commit/f57c0c931013818e64c04aef4ba7e49b1aa4b8c4))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.36 to 9.5.39 (#125) ([`ebb198c`](https://github.com/rungalileo/protect/commit/ebb198c1f90bf0254ad9c7fb18897d964f158f41))
+
+* chore(deps): bump galileo-core from 2.13.0 to 2.14.0 (#124) ([`4895105`](https://github.com/rungalileo/protect/commit/48951055708b8abaa12668820c2683c8fbf306e3))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.34 to 9.5.36 (#123) ([`f1c18af`](https://github.com/rungalileo/protect/commit/f1c18affba0cdb6ea243897f9cbf0fbafa7dd692))
+
+* chore(deps): bump langchain-core from 0.2.40 to 0.2.41 (#122) ([`151b85e`](https://github.com/rungalileo/protect/commit/151b85e4e350b6e0d1d78f359abbb109586d5939))
+
+* chore(deps-dev): bump pydantic from 2.9.1 to 2.9.2 (#121) ([`284ce75`](https://github.com/rungalileo/protect/commit/284ce75c15af7bd7d828c48e995d794d2a3efb7f))
+
+* chore(deps): bump galileo-core from 2.12.1 to 2.13.0 (#120) ([`32ff482`](https://github.com/rungalileo/protect/commit/32ff482c76f57a06c7b6f1a6c5d8e39aae1506cf))
+
+* chore(deps-dev): bump pydantic from 2.9.0 to 2.9.1 (#119) ([`f3ade6c`](https://github.com/rungalileo/protect/commit/f3ade6c22ba8aa46cae85d72c641e4c39406e731))
+
+* chore(deps-dev): bump pytest from 8.3.2 to 8.3.3 (#118) ([`f864405`](https://github.com/rungalileo/protect/commit/f864405d1e83b72da6a1fb59a01ec29e3f42d66d))
+
+* chore(deps): bump langchain-core from 0.2.38 to 0.2.40 (#117) ([`b9feb58`](https://github.com/rungalileo/protect/commit/b9feb5843ba490765bb3de41beb9486cac19f825))
+
+* chore(deps-dev): bump mkdocstrings from 0.26.0 to 0.26.1 (#114) ([`6f93626`](https://github.com/rungalileo/protect/commit/6f93626cbd75439b1626cd5ed3c653c62b513acc))
+
+* chore(deps-dev): bump mkdocstrings-python from 1.11.0 to 1.11.1 (#116) ([`cbe2c60`](https://github.com/rungalileo/protect/commit/cbe2c60c1da5d6e8ad657d3d93fc5ba4af389324))
+
+* chore(deps): bump galileo-core from 2.11.1 to 2.12.1 (#115) ([`c2d4332`](https://github.com/rungalileo/protect/commit/c2d4332719613520e2c79e76b7683872bf90bae6))
+
+* chore(deps): bump langchain-core from 0.2.37 to 0.2.38 (#113) ([`23b23f9`](https://github.com/rungalileo/protect/commit/23b23f94571d743e4d9960dc833b121228d78197))
+
+* chore(deps-dev): bump pydantic from 2.8.2 to 2.9.0 (#112) ([`240b5af`](https://github.com/rungalileo/protect/commit/240b5afcd1530eb2728a97d12b9e0526c2cc4ab5))
+
+* chore(deps-dev): bump mkdocstrings from 0.25.2 to 0.26.0 (#107) ([`931f039`](https://github.com/rungalileo/protect/commit/931f039a4899856cbd7471917fde228135f2c655))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.33 to 9.5.34 (#109) ([`5c5119e`](https://github.com/rungalileo/protect/commit/5c5119ea3cd936b71294668ae7c4211042085cd0))
+
+* chore(deps): bump langchain-core from 0.2.35 to 0.2.37 (#110) ([`1c15b6a`](https://github.com/rungalileo/protect/commit/1c15b6abccdbce411fd39cc71f98047eb2add8d6))
+
+* chore(deps): bump python-semantic-release/python-semantic-release from 9.8.6 to 9.8.7 (#106) ([`820b19f`](https://github.com/rungalileo/protect/commit/820b19f52e1ddc05e6fd60ba0e0dff5b942006a9))
+
+* chore(deps-dev): bump mkdocs from 1.6.0 to 1.6.1 (#108) ([`eae1d53`](https://github.com/rungalileo/protect/commit/eae1d53c99e47a0456bacc183c829e0ebfbb7602))
+
+* chore(deps-dev): bump pytest-asyncio from 0.23.8 to 0.24.0 (#102) ([`e230238`](https://github.com/rungalileo/protect/commit/e230238e9f6e2aeee978617b11a11652bc765a82))
+
+* chore(deps): bump langchain-core from 0.2.33 to 0.2.35 (#103) ([`2c6cfed`](https://github.com/rungalileo/protect/commit/2c6cfed2ad64c59803b2e72fb26b4b65475d4941))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.32 to 9.5.33 (#104)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`fb54406`](https://github.com/rungalileo/protect/commit/fb54406ddb26e941d60e570bca294a8606c39be2))
+
+* chore(deps): bump galileo-core from 2.6.0 to 2.8.1 (#105)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`fd49b1b`](https://github.com/rungalileo/protect/commit/fd49b1b97b56899f8480d2b1b5fd4cc82d5bc14b))
+
+* chore(deps-dev): bump griffe-fieldz from 0.1.2 to 0.2.0 (#99)
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Setu Shah <setu@rungalileo.io> ([`912cc1e`](https://github.com/rungalileo/protect/commit/912cc1ef756471692d204edec9c24c8cc567d93e))
+
+* chore: Update `pre-commit` config to drop `isort`, `black` (#97) ([`d72603c`](https://github.com/rungalileo/protect/commit/d72603c32721e5c5667b198f22ad0e372911bbf1))
+
+* chore(deps): bump langchain-core from 0.2.28 to 0.2.29 (#98) ([`6c1e92f`](https://github.com/rungalileo/protect/commit/6c1e92fb3445ad0bb26180f3cbdaf8cf5c7d5ed0))
+
+* chore(deps): bump langchain-core from 0.2.25 to 0.2.28 (#96) ([`ca5e622`](https://github.com/rungalileo/protect/commit/ca5e6224805ce90d4c688d5b24223e17efe613a5))
+
+* chore(deps-dev): bump mkdocs-material from 9.5.30 to 9.5.31 (#95)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`e84c061`](https://github.com/rungalileo/protect/commit/e84c061d51a90958a4790a59c55f05a174af2b1f))
+
+* chore(deps-dev): bump coverage from 7.6.0 to 7.6.1 (#94) ([`2ee24ce`](https://github.com/rungalileo/protect/commit/2ee24ce3b2663e71a8d15bf815f2ef5e5f60299e))
+
+### Continuous Integration
+
+* ci(docs): Publish docs to Cloudflare Pages (#141) ([`3cf3b7b`](https://github.com/rungalileo/protect/commit/3cf3b7b8afd45ad5f108f045c94e017e3d5cd216))
+
+### Features
+
+* feat: Pass in project name to invocation requests (#140) ([`95082f9`](https://github.com/rungalileo/protect/commit/95082f9dc2e9b51b862285bba19c0f331ddeb36b))
+
+
 ## v0.14.2 (2024-08-02)
 
-### Chore
+### Bug Fixes
+
+* fix(stage): Typo `prioritzed_rulesets` => `prioritized_rulesets` (#93) ([`5f2bfd6`](https://github.com/rungalileo/protect/commit/5f2bfd60389fa3449465b0a14c0c563696f12333))
+
+### Chores
+
+* chore(release): v0.14.2
+
+Automatically generated by python-semantic-release ([`9aa3635`](https://github.com/rungalileo/protect/commit/9aa363585079bc884a571e55f99420c8a292db2b))
 
 * chore(deps): bump python-semantic-release/python-semantic-release from 9.8.3 to 9.8.6 (#91) ([`60e768c`](https://github.com/rungalileo/protect/commit/60e768c4069f1e6948dac453b83eca986b738a43))
 
 * chore(schemas): Export `SubscriptionConfig` from `galleo_protect` (#89) ([`05c4790`](https://github.com/rungalileo/protect/commit/05c4790fdbd3ef22594d0b0af2c8b440b79f78ff))
 
-### Fix
-
-* fix(stage): Typo `prioritzed_rulesets` =&gt; `prioritized_rulesets` (#93) ([`5f2bfd6`](https://github.com/rungalileo/protect/commit/5f2bfd60389fa3449465b0a14c0c563696f12333))
-
-### Refactor
+### Refactoring
 
 * refactor(schema): Use `ExecutionSchema` from `galileo-core` (#90) ([`2554e9b`](https://github.com/rungalileo/protect/commit/2554e9bcd2d94e1842a221099f64bd359c99fcb2))
 
+
 ## v0.14.1 (2024-07-30)
 
-### Chore
+### Chores
 
 * chore(release): v0.14.1
 
@@ -26,7 +139,7 @@ Automatically generated by python-semantic-release ([`754b2c2`](https://github.c
 
 * chore(deps): bump galileo-core from 2.4.0 to 2.5.1 (#88)
 
-Co-authored-by: Setu Shah &lt;setu@rungalileo.io&gt; ([`aa7ee88`](https://github.com/rungalileo/protect/commit/aa7ee880566a82366e074cb456653080861a9740))
+Co-authored-by: Setu Shah <setu@rungalileo.io> ([`aa7ee88`](https://github.com/rungalileo/protect/commit/aa7ee880566a82366e074cb456653080861a9740))
 
 * chore(deps-dev): bump mkdocs-material from 9.5.29 to 9.5.30 (#86) ([`72042fd`](https://github.com/rungalileo/protect/commit/72042fd8a3e14febd3a9544e6c5876a9ce461062))
 
@@ -58,13 +171,13 @@ Co-authored-by: Setu Shah &lt;setu@rungalileo.io&gt; ([`aa7ee88`](https://github
 
 * chore(deps): bump python-semantic-release/python-semantic-release from 9.8.0 to 9.8.3 (#72)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`1384d56`](https://github.com/rungalileo/protect/commit/1384d567c6eec1081c8b22e6c414f4f2eb412bb8))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`1384d56`](https://github.com/rungalileo/protect/commit/1384d567c6eec1081c8b22e6c414f4f2eb412bb8))
 
 * chore(deps): bump codecov/codecov-action from 4.4.1 to 4.5.0 (#71)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`b510d8c`](https://github.com/rungalileo/protect/commit/b510d8c2aee595b8960104df18e72b0772f1ba1a))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`b510d8c`](https://github.com/rungalileo/protect/commit/b510d8c2aee595b8960104df18e72b0772f1ba1a))
 
 * chore(deps): Bump `galileo-core` to v2.3.0 to allow `project_name` in request, support subscriptions in actions (#70) ([`664c462`](https://github.com/rungalileo/protect/commit/664c462d09476b03edee514026e7710365c6f714))
 
@@ -72,21 +185,23 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * chore(docs): Remove `griffe-typingdoc` mkdocs extension (#68) ([`f33ab0a`](https://github.com/rungalileo/protect/commit/f33ab0a91b289db1c0d12f2d119a57483d16f818))
 
+
 ## v0.14.0 (2024-06-21)
 
-### Chore
+### Chores
 
 * chore(release): v0.14.0
 
 Automatically generated by python-semantic-release ([`4a8a9ed`](https://github.com/rungalileo/protect/commit/4a8a9ed11364c7a85d075476d17efad946833aff))
 
-### Feature
+### Features
 
 * feat(config): Update how we set / use config to match `galileo-core` v2 (#67) ([`859c268`](https://github.com/rungalileo/protect/commit/859c268d1d52e5287326bfe1a4f329962b9eb94a))
 
+
 ## v0.13.0 (2024-06-18)
 
-### Chore
+### Chores
 
 * chore(release): v0.13.0
 
@@ -96,88 +211,93 @@ Automatically generated by python-semantic-release ([`fc5bd30`](https://github.c
 
 * chore(deps-dev): bump mkdocs-material from 9.5.26 to 9.5.27 (#64)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: quinn-galileo &lt;152718227+quinn-galileo@users.noreply.github.com&gt; ([`27e2db4`](https://github.com/rungalileo/protect/commit/27e2db4705f0a443610af72c3a90cb3991c4ea66))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: quinn-galileo <152718227+quinn-galileo@users.noreply.github.com> ([`27e2db4`](https://github.com/rungalileo/protect/commit/27e2db4705f0a443610af72c3a90cb3991c4ea66))
 
 * chore(deps): bump langchain-core from 0.2.5 to 0.2.7 (#63)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: quinn-galileo &lt;152718227+quinn-galileo@users.noreply.github.com&gt; ([`01b2402`](https://github.com/rungalileo/protect/commit/01b2402b43d234ceff3221b534ec9d2572320255))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: quinn-galileo <152718227+quinn-galileo@users.noreply.github.com> ([`01b2402`](https://github.com/rungalileo/protect/commit/01b2402b43d234ceff3221b534ec9d2572320255))
 
 * chore(deps-dev): bump pydantic from 2.7.3 to 2.7.4 (#62)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`478f394`](https://github.com/rungalileo/protect/commit/478f394556d2f348804eb4b51e54298e5a9f2828))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`478f394`](https://github.com/rungalileo/protect/commit/478f394556d2f348804eb4b51e54298e5a9f2828))
 
 * chore: Mark package as typed (#61) ([`b7e6e25`](https://github.com/rungalileo/protect/commit/b7e6e257e2092fbe162e68d7e3d54175dec6a7f3))
 
-### Feature
+### Features
 
 * feat(metrics): Add `context_adherence_luna` to supported metrics (#65) ([`58ba921`](https://github.com/rungalileo/protect/commit/58ba921bc923a50afcfcad981310734e4d76677e))
 
+
 ## v0.12.0 (2024-06-11)
 
-### Chore
+### Chores
 
 * chore(release): v0.12.0
 
 Automatically generated by python-semantic-release ([`67ca1eb`](https://github.com/rungalileo/protect/commit/67ca1ebb4eabf5402b93c464dd93b58b104e6a07))
 
-### Feature
+### Features
 
 * feat(core): Wrap `get_project` from `galileo-core` (#60) ([`5a83088`](https://github.com/rungalileo/protect/commit/5a830882c7469f1f5d6e09399bf0e002992e9d47))
 
+
 ## v0.11.1 (2024-06-11)
 
-### Chore
+### Bug Fixes
+
+* fix(invocation): Use async by default, wrap sync within async (#59) ([`616758a`](https://github.com/rungalileo/protect/commit/616758a5aeb6ba8da2fecbd9d1924f48af1fea6a))
+
+### Chores
 
 * chore(release): v0.11.1
 
 Automatically generated by python-semantic-release ([`a149664`](https://github.com/rungalileo/protect/commit/a1496645b9f34b6e98279d366fc4b2b69440bf55))
 
-### Fix
-
-* fix(invocation): Use async by default, wrap sync within async (#59) ([`616758a`](https://github.com/rungalileo/protect/commit/616758a5aeb6ba8da2fecbd9d1924f48af1fea6a))
 
 ## v0.11.0 (2024-06-08)
 
-### Chore
+### Chores
 
 * chore(release): v0.11.0
 
 Automatically generated by python-semantic-release ([`d9b7830`](https://github.com/rungalileo/protect/commit/d9b78303ce385b69d3c6771f5977ba02129ee3d3))
 
-### Feature
+### Features
 
 * feat: Add helper to get all projects (#58) ([`90993e0`](https://github.com/rungalileo/protect/commit/90993e0f2feeb905ab58bc0c79a9bb9b3dd24852))
 
+
 ## v0.10.1 (2024-06-05)
 
-### Chore
+### Bug Fixes
+
+* fix(stages): Export `update_stage` (#57) ([`930085d`](https://github.com/rungalileo/protect/commit/930085d394e37f97d570a5aad3971741a0945c50))
+
+### Chores
 
 * chore(release): v0.10.1
 
 Automatically generated by python-semantic-release ([`f1f63e4`](https://github.com/rungalileo/protect/commit/f1f63e4efec988dfab3dac54edb0ddd9dd27d536))
 
-### Fix
-
-* fix(stages): Export `update_stage` (#57) ([`930085d`](https://github.com/rungalileo/protect/commit/930085d394e37f97d570a5aad3971741a0945c50))
 
 ## v0.10.0 (2024-06-05)
 
-### Chore
+### Chores
 
 * chore(release): v0.10.0
 
 Automatically generated by python-semantic-release ([`fa61ce7`](https://github.com/rungalileo/protect/commit/fa61ce7c2189584c2c3e98ab7e37fbc060319119))
 
-### Ci
+### Continuous Integration
 
 * ci(docs): Publish to, serve from `docs` branch (#56) ([`3bd05f6`](https://github.com/rungalileo/protect/commit/3bd05f62e8333e6f3e9badf54e86618c22c42001))
 
-### Feature
+### Features
 
 * feat(stages): Add ability to update stage with new rulesets (#55) ([`1b3aa27`](https://github.com/rungalileo/protect/commit/1b3aa276d499fd759d3e2ea25a4601888b157a29))
 
@@ -185,9 +305,14 @@ Automatically generated by python-semantic-release ([`fa61ce7`](https://github.c
 
 * feat(stages): Add helper method to get a stage by name or ID (#53) ([`3aa515e`](https://github.com/rungalileo/protect/commit/3aa515ef622ac4ef0b907018f5d6d8c37c7a3c8e))
 
+
 ## v0.9.0 (2024-06-03)
 
-### Chore
+### Bug Fixes
+
+* fix(stage): Remove action, rename `action_enabled` => `paused` (#43) ([`e045523`](https://github.com/rungalileo/protect/commit/e0455231c7f676c97658a8950b5b7f6938ea56d6))
+
+### Chores
 
 * chore(release): v0.9.0
 
@@ -221,31 +346,29 @@ Automatically generated by python-semantic-release ([`1fbd895`](https://github.c
 
 * chore(deps-dev): bump pytest from 8.2.0 to 8.2.1 (#37) ([`b8c08b0`](https://github.com/rungalileo/protect/commit/b8c08b017b27dec13b40f6e6509f28956f2b926f))
 
-### Feature
+### Features
 
 * feat: Replace `requests` with `httpx` for all requests (#41) ([`057ce63`](https://github.com/rungalileo/protect/commit/057ce63b63e42b0e6437916b1ba7fb190761497e))
 
 * feat: Set connection, read timeout for all requests (#40) ([`770c08c`](https://github.com/rungalileo/protect/commit/770c08c014d3eaa1909766c930b1d387bf0aa3f7))
 
-### Fix
-
-* fix(stage): Remove action, rename `action_enabled` =&gt; `paused` (#43) ([`e045523`](https://github.com/rungalileo/protect/commit/e0455231c7f676c97658a8950b5b7f6938ea56d6))
 
 ## v0.8.0 (2024-05-15)
 
-### Chore
+### Chores
 
 * chore(release): v0.8.0
 
 Automatically generated by python-semantic-release ([`5896e32`](https://github.com/rungalileo/protect/commit/5896e32b1ec63723319096fd62dc7b61f266d693))
 
-### Feature
+### Features
 
 * feat(langchain): Add flags for ignoring trigger, echoing output (#34) ([`2fd4dbb`](https://github.com/rungalileo/protect/commit/2fd4dbbf6b28c9eb16c8544413a9e8b6eaf78357))
 
+
 ## v0.7.0 (2024-05-14)
 
-### Chore
+### Chores
 
 * chore(release): v0.7.0
 
@@ -253,17 +376,18 @@ Automatically generated by python-semantic-release ([`163c0a3`](https://github.c
 
 * chore(deps-dev): bump furo from 2024.4.27 to 2024.5.6 (#31) ([`937c2c5`](https://github.com/rungalileo/protect/commit/937c2c5e9315727c7d608ba5b86bceac76c4be82))
 
-### Feature
+### Features
 
 * feat(langchain): Add tool node for invoking, runnable for parsing output (#30) ([`e509488`](https://github.com/rungalileo/protect/commit/e50948859e09869ceb0d2ea78477c2afdba04aea))
 
-### Refactor
+### Refactoring
 
 * refactor: Move `Response` to `galileo-core` (#33) ([`a7d202a`](https://github.com/rungalileo/protect/commit/a7d202a8f32e2110fb9e3d32aeffaed02aa3753f))
 
+
 ## v0.6.1 (2024-05-06)
 
-### Chore
+### Chores
 
 * chore(release): v0.6.1
 
@@ -281,16 +405,17 @@ Automatically generated by python-semantic-release ([`aeecf42`](https://github.c
 
 * chore(deps-dev): bump pydantic from 2.7.0 to 2.7.1 (#26)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`b30e55a`](https://github.com/rungalileo/protect/commit/b30e55ab20e10a1e1252739985db79a67fab34e3))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`b30e55a`](https://github.com/rungalileo/protect/commit/b30e55ab20e10a1e1252739985db79a67fab34e3))
 
 * chore(deps): bump python-semantic-release/python-semantic-release from 9.4.0 to 9.6.0 (#23) ([`96a2d45`](https://github.com/rungalileo/protect/commit/96a2d4562a0f755aaa74372ddafbecdc7fcee2e1))
 
 * chore(deps): bump codecov/codecov-action from 4.1.1 to 4.3.1 (#22) ([`5d4a917`](https://github.com/rungalileo/protect/commit/5d4a9175af566f0e39b1874e15bbd11a868b49fd))
 
+
 ## v0.6.0 (2024-04-30)
 
-### Chore
+### Chores
 
 * chore(release): v0.6.0
 
@@ -298,9 +423,9 @@ Automatically generated by python-semantic-release ([`0007bfe`](https://github.c
 
 * chore(deps-dev): bump myst-parser from 2.0.0 to 3.0.1 (#17)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Setu Shah &lt;setu@rungalileo.io&gt; ([`03130e9`](https://github.com/rungalileo/protect/commit/03130e9e21262e9f429fabb6b2d30b9b0ddc9c2e))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Setu Shah <setu@rungalileo.io> ([`03130e9`](https://github.com/rungalileo/protect/commit/03130e9e21262e9f429fabb6b2d30b9b0ddc9c2e))
 
 * chore(deps-dev): bump autodoc-pydantic from 2.1.0 to 2.2.0 (#19) ([`8fa149c`](https://github.com/rungalileo/protect/commit/8fa149cb2b87dad363b336223e2cab59977c5a36))
 
@@ -310,28 +435,29 @@ Co-authored-by: Setu Shah &lt;setu@rungalileo.io&gt; ([`03130e9`](https://github
 
 * chore(deps-dev): bump pytest-xdist from 3.5.0 to 3.6.1 (#20)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`c2a1687`](https://github.com/rungalileo/protect/commit/c2a16871c6ed9340bd2fe6c62f03dfec717b9e09))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`c2a1687`](https://github.com/rungalileo/protect/commit/c2a16871c6ed9340bd2fe6c62f03dfec717b9e09))
 
 * chore(deps): bump idna from 3.6 to 3.7 (#12)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Shuai Shao &lt;shuaishao93@gmail.com&gt; ([`a666638`](https://github.com/rungalileo/protect/commit/a6666387079a8b0fa7fe22cec3992303a73c73b2))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Shuai Shao <shuaishao93@gmail.com> ([`a666638`](https://github.com/rungalileo/protect/commit/a6666387079a8b0fa7fe22cec3992303a73c73b2))
 
 * chore(deps-dev): bump pydantic from 2.6.4 to 2.7.0 (#14)
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: tyler-galileo &lt;152903655+tyler-galileo@users.noreply.github.com&gt; ([`d4413e1`](https://github.com/rungalileo/protect/commit/d4413e13e60503b39be23dbb92e13cee5bfab6fa))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: tyler-galileo <152903655+tyler-galileo@users.noreply.github.com> ([`d4413e1`](https://github.com/rungalileo/protect/commit/d4413e13e60503b39be23dbb92e13cee5bfab6fa))
 
-### Feature
+### Features
 
 * feat: Add support for async invocations (#21) ([`5977b64`](https://github.com/rungalileo/protect/commit/5977b6434b5c05e09c56c17f33154dcb9ca18bb8))
 
+
 ## v0.5.2 (2024-04-16)
 
-### Chore
+### Chores
 
 * chore(release): v0.5.2
 
@@ -339,73 +465,79 @@ Automatically generated by python-semantic-release ([`9558158`](https://github.c
 
 * chore(galile-core): Bump galileo-core to add new operators  (#16)
 
-Co-authored-by: Elliott &lt;echartock3@gmail.com&gt; ([`763d899`](https://github.com/rungalileo/protect/commit/763d8992a120bb5487c26e567ba556be4011799d))
+Co-authored-by: Elliott <echartock3@gmail.com> ([`763d899`](https://github.com/rungalileo/protect/commit/763d8992a120bb5487c26e567ba556be4011799d))
+
 
 ## v0.5.1 (2024-04-16)
 
-### Chore
+### Bug Fixes
+
+* fix(protect): Set more realistic timeout and fix typos (#15) ([`5de3a01`](https://github.com/rungalileo/protect/commit/5de3a01161b64639f4b1d8a90473e4cfcbc634b9))
+
+### Chores
 
 * chore(release): v0.5.1
 
 Automatically generated by python-semantic-release ([`ef40011`](https://github.com/rungalileo/protect/commit/ef40011ae168f189535e785394b3ed3683f7bcb1))
 
-### Fix
-
-* fix(protect): Set more realistic timeout and fix typos (#15) ([`5de3a01`](https://github.com/rungalileo/protect/commit/5de3a01161b64639f4b1d8a90473e4cfcbc634b9))
 
 ## v0.5.0 (2024-04-10)
 
-### Chore
+### Chores
 
 * chore(release): v0.5.0
 
 Automatically generated by python-semantic-release ([`49ca901`](https://github.com/rungalileo/protect/commit/49ca901b02071ac99d9da1d45ad6577c9802e881))
 
-### Feature
+### Features
 
 * feat(rule-metrics): Include prompt injection in enum (#11) ([`2d97fbb`](https://github.com/rungalileo/protect/commit/2d97fbba11f6f2bf1463700af0861097d3ddef8e))
 
+
 ## v0.4.0 (2024-04-10)
 
-### Chore
+### Chores
 
 * chore(release): v0.4.0
 
 Automatically generated by python-semantic-release ([`c4a2f6a`](https://github.com/rungalileo/protect/commit/c4a2f6a797d65bb92f4f339368407a0600451fc7))
 
-### Feature
+### Features
 
 * feat(stage): Add methods to pause, resume stage (#10) ([`2993de1`](https://github.com/rungalileo/protect/commit/2993de1cdaa88ba8c8cd4109d47efda507dbbae6))
 
+
 ## v0.3.0 (2024-04-09)
 
-### Chore
+### Chores
 
 * chore(release): v0.3.0
 
 Automatically generated by python-semantic-release ([`263b48a`](https://github.com/rungalileo/protect/commit/263b48ac404b8593d452672de222d33a63fa35cc))
 
-### Feature
+### Features
 
 * feat: Add enum for rule metrics (#9) ([`f5d6f8c`](https://github.com/rungalileo/protect/commit/f5d6f8cdcb4ca160e8c2eef0bfd68f302765fe46))
 
+
 ## v0.2.0 (2024-04-08)
 
-### Chore
+### Chores
 
 * chore(release): v0.2.0
 
 Automatically generated by python-semantic-release ([`bb6c843`](https://github.com/rungalileo/protect/commit/bb6c8434ce3e1160da2ff5637d2e37f9a370ebed))
 
-### Feature
+### Features
 
 * feat: Add helper to create a stage (#8) ([`d65a7a8`](https://github.com/rungalileo/protect/commit/d65a7a833a941d90f8f537aba9f54063fe17cefb))
 
 * feat: Add support for Protect project creation (#7) ([`dab6f9f`](https://github.com/rungalileo/protect/commit/dab6f9f551326358c08a9dd62ec254603ccfc835))
 
+
 ## v0.1.0 (2024-04-08)
 
-### Chore
+### Chores
 
 * chore(release): v0.1.0
 
@@ -417,23 +549,25 @@ Automatically generated by python-semantic-release ([`1e13e14`](https://github.c
 
 ### Documentation
 
-* docs: Change emoji for home page from superman =&gt; shield (#2) ([`5910792`](https://github.com/rungalileo/protect/commit/59107929c2f359c96c38d15a627158a9a5eee6d2))
+* docs: Change emoji for home page from superman => shield (#2) ([`5910792`](https://github.com/rungalileo/protect/commit/59107929c2f359c96c38d15a627158a9a5eee6d2))
 
-### Feature
+### Features
 
 * feat: Add `invoke` method (#6) ([`4116a5c`](https://github.com/rungalileo/protect/commit/4116a5ce17198af902d30b810469dc71677ae331))
 
 * feat(config): Setup `ProtectConfig` (#5) ([`e7b8e6b`](https://github.com/rungalileo/protect/commit/e7b8e6bdfdc73e8b6051148cff5a2ac36310ead8))
 
+
 ## v0.0.2 (2024-03-26)
 
-### Chore
+### Chores
 
 * chore(release): v0.0.2
 
 Automatically generated by python-semantic-release ([`c3adbd7`](https://github.com/rungalileo/protect/commit/c3adbd7ae689f5dc81609e684ac4b17780797759))
 
 * chore: Bootstrap project (#1) ([`457320d`](https://github.com/rungalileo/protect/commit/457320dbab98cd557f801ed397e191947eef287d))
+
 
 ## v0.0.1 (2024-03-25)
 

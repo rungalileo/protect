@@ -29,4 +29,4 @@ if is_dependency_available("langchain_core"):
     from galileo_protect.langchain import ProtectParser, ProtectTool
 
 
-__version__ = "0.14.2"
+__version__ = "0.15.0"
