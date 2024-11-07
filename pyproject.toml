@@ -69,6 +69,7 @@ addopts = [
     "--disable-socket",
     "--allow-unix-socket",
 ]
+asyncio_default_fixture_loop_scope = "function"
 
 # Linters and formatters.
 [tool.ruff]
