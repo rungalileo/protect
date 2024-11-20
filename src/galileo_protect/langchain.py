@@ -30,6 +30,7 @@ class ProtectTool(BaseTool):
 
     prioritized_rulesets: Optional[Sequence[Ruleset]] = None
     project_id: Optional[UUID4] = None
+    project_name: Optional[str] = None
     stage_name: Optional[str] = None
     stage_id: Optional[UUID4] = None
     timeout: float = TIMEOUT
@@ -45,6 +46,7 @@ class ProtectTool(BaseTool):
         return invoke(
             payload=payload,
             prioritized_rulesets=self.prioritized_rulesets,
+            project_name=self.project_name,
             project_id=self.project_id,
             stage_name=self.stage_name,
             stage_id=self.stage_id,
