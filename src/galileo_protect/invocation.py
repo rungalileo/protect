@@ -66,7 +66,7 @@ async def ainvoke(
             payload=payload,
             rulesets=prioritized_rulesets or [],
             project_id=project_id or config.project_id,
-            project_name=project_name,
+            project_name=project_name or config.project_name,
             stage_name=stage_name or config.stage_name,
             stage_id=stage_id or config.stage_id,
             timeout=timeout,
