@@ -14,40 +14,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GALILEO_AUTOMATION_GITHUB_TOKEN }}
-
-      - name: Install poetry
-        run: pipx install poetry==${{ vars.POETRY_VERSION }}
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
-          cache: "poetry"
-          cache-dependency-path: "pyproject.toml"
-
-      - name: Install Dependencies
-        # Install all dependencies so that the docs can use the function and type signatures.
-        run: |
-          pipx install invoke
-          poetry install --all-extras --without test,dev
-
-      - name: Setup Git Config with SSH Signing Key
-        run: |
-          mkdir -vp ~/.ssh
-          echo -e "${{ secrets.GALILEO_AUTOMATION_SSH_PUBLIC_KEY }}" >>~/.ssh/signing_key.pub
-          echo -e "${{ secrets.GALILEO_AUTOMATION_SSH_PRIVATE_KEY }}" >>~/.ssh/signing_key
-          git config --global gpg.format ssh
-          git config --global user.signingKey ~/.ssh/signing_key
-          git config --global commit.gpgsign true
-          git config --global user.email ci@rungalileo.io
-          git config --global user.name "galileo-automation"
-
-      - name: Build and Deploy Docs
-        run: poetry run mkdocs gh-deploy
-
       - name: Publish Docs
         uses: cloudflare/wrangler-action@v3
         with:
