@@ -1,3 +1,5 @@
+# mypy: disable-error-code=syntax
+# We need to ignore syntax errors until https://github.com/python/mypy/issues/17535 is resolved.
 from typing import Optional
 
 from pydantic import UUID4
