@@ -446,13 +446,13 @@ colorama = ">=0.4"
 
 [[package]]
 name = "griffe-fieldz"
-version = "0.2.0"
+version = "0.2.1"
 description = "Griffe extension adding support for data-class like things (pydantic, attrs, etc...)"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "griffe_fieldz-0.2.0-py3-none-any.whl", hash = "sha256:c2ebb0c63e7b660ddcc7c94237c6309a6bce998552b8c3483f0c14016fabf949"},
-    {file = "griffe_fieldz-0.2.0.tar.gz", hash = "sha256:fba1ecadb4d19e7f1c7b87e13caadd426f7066bd8f4bbb53615bd035bf67be58"},
+    {file = "griffe_fieldz-0.2.1-py3-none-any.whl", hash = "sha256:04ae78b487c832a38b0495f971784d513da413b867c51e429f39d74f76d4f941"},
+    {file = "griffe_fieldz-0.2.1.tar.gz", hash = "sha256:7371693cdd045ac95aaebd16a81586d8dfa72c30e2d4519e0dde0d80f8ef0dc7"},
 ]
 
 [package.dependencies]
