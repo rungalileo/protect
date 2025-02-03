@@ -1,6 +1,103 @@
 # CHANGELOG
 
 
+## v0.15.4 (2025-02-03)
+
+### Chores
+
+- **deps**: Bump codecov/codecov-action from 5.0.7 to 5.1.2
+  ([#168](https://github.com/rungalileo/protect/pull/168),
+  [`713dae7`](https://github.com/rungalileo/protect/commit/713dae7da7e28610a48fe826b4ceb8071eef6a8f))
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **deps**: Bump codecov/codecov-action from 5.1.2 to 5.3.1
+  ([#177](https://github.com/rungalileo/protect/pull/177),
+  [`be7ee8b`](https://github.com/rungalileo/protect/commit/be7ee8b8525fb53f0bea1565135b372581d8c77d))
+
+- **deps**: Bump galileo-core from 2.30.2 to 2.31.0
+  ([#163](https://github.com/rungalileo/protect/pull/163),
+  [`7c3251f`](https://github.com/rungalileo/protect/commit/7c3251f09c707d510422a2f0e59e60347b49614c))
+
+- **deps**: Bump galileo-core from 2.31.0 to 2.33.0
+  ([#166](https://github.com/rungalileo/protect/pull/166),
+  [`889df0f`](https://github.com/rungalileo/protect/commit/889df0ff97b36e928163b997ce4e150a8d90e866))
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **deps**: Bump galileo-core from 2.33.0 to 2.33.2
+  ([#170](https://github.com/rungalileo/protect/pull/170),
+  [`f1e8c6e`](https://github.com/rungalileo/protect/commit/f1e8c6e71bb59bdb150bbd9ab4796442170b2354))
+
+- **deps**: Bump galileo-core from 2.33.2 to 2.34.0
+  ([#171](https://github.com/rungalileo/protect/pull/171),
+  [`ad064da`](https://github.com/rungalileo/protect/commit/ad064da34931b3868f449947006e7888311dfc0a))
+
+- **deps**: Bump galileo-core from 2.34.0 to 2.35.0
+  ([#175](https://github.com/rungalileo/protect/pull/175),
+  [`ffa2a9f`](https://github.com/rungalileo/protect/commit/ffa2a9f1cdcf581b101ba15c2df970d55f12b15d))
+
+- **deps**: Bump galileo-core from 2.35.0 to 2.37.1
+  ([#179](https://github.com/rungalileo/protect/pull/179),
+  [`34b3dcc`](https://github.com/rungalileo/protect/commit/34b3dcc90c221fb09934af261578bc558b403f6f))
+
+- **deps**: Bump python-semantic-release/python-semantic-release from 9.15.1 to 9.15.2
+  ([#167](https://github.com/rungalileo/protect/pull/167),
+  [`ea558c9`](https://github.com/rungalileo/protect/commit/ea558c9cd623236dabd216326ac305e06378954a))
+
+- **deps**: Bump python-semantic-release/python-semantic-release from 9.15.2 to 9.17.0
+  ([#178](https://github.com/rungalileo/protect/pull/178),
+  [`d98ec61`](https://github.com/rungalileo/protect/commit/d98ec6141f5dffaa1fab2f28264095fe06e726d2))
+
+- **deps-dev**: Bump griffe-fieldz from 0.2.0 to 0.2.1
+  ([#172](https://github.com/rungalileo/protect/pull/172),
+  [`840c3a0`](https://github.com/rungalileo/protect/commit/840c3a07d7c8751123a84e855b9fe9e369958ebb))
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **deps-dev**: Bump jinja2 from 3.1.4 to 3.1.5
+  ([#165](https://github.com/rungalileo/protect/pull/165),
+  [`d7a64c1`](https://github.com/rungalileo/protect/commit/d7a64c12a7e32430f9863ce9656882286bc35e51))
+
+- **deps-dev**: Bump mkdocs-material from 9.5.49 to 9.5.50
+  ([#174](https://github.com/rungalileo/protect/pull/174),
+  [`aa0dba0`](https://github.com/rungalileo/protect/commit/aa0dba03c3a1b9ae4a5147af97756c7f8f436625))
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **deps-dev**: Bump mkdocs-material from 9.5.50 to 9.6.1
+  ([#180](https://github.com/rungalileo/protect/pull/180),
+  [`02a0da3`](https://github.com/rungalileo/protect/commit/02a0da327317b2750e82ee6a1310ace26afeba92))
+
+- **deps-dev**: Bump mypy from 1.10.1 to 1.14.0
+  ([#164](https://github.com/rungalileo/protect/pull/164),
+  [`40ecbd4`](https://github.com/rungalileo/protect/commit/40ecbd486c8df5d886a45e61c2ac862c4776922d))
+
+- **deps-dev**: Bump mypy from 1.14.0 to 1.14.1
+  ([#169](https://github.com/rungalileo/protect/pull/169),
+  [`67a00ff`](https://github.com/rungalileo/protect/commit/67a00ff392ca6d39fecd6538cbc20139f8501988))
+
+- **deps-dev**: Bump pydantic from 2.10.3 to 2.10.4
+  ([#162](https://github.com/rungalileo/protect/pull/162),
+  [`f9f4653`](https://github.com/rungalileo/protect/commit/f9f46530a02ed57cd8b0f8a63e2b0db22b92e7da))
+
+- **deps-dev**: Bump pydantic from 2.10.4 to 2.10.5
+  ([#173](https://github.com/rungalileo/protect/pull/173),
+  [`7e76a22`](https://github.com/rungalileo/protect/commit/7e76a221cc826c15856378e0508bd3c6da8c1afe))
+
+- **deps-dev**: Bump pydantic from 2.10.5 to 2.10.6
+  ([#176](https://github.com/rungalileo/protect/pull/176),
+  [`59af671`](https://github.com/rungalileo/protect/commit/59af671d2238ef5904e3188dedd38947deed58cf))
+
+
 ## v0.15.3 (2024-12-16)
 
 ### Chores
@@ -23,6 +120,11 @@ Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.c
 - **deps-dev**: Bump mkdocs-material from 9.5.47 to 9.5.48
   ([#158](https://github.com/rungalileo/protect/pull/158),
   [`78194cc`](https://github.com/rungalileo/protect/commit/78194cce96d4f7b39650c2955f290cb7bb7eaaab))
+
+- **release**: V0.15.3
+  ([`e31376b`](https://github.com/rungalileo/protect/commit/e31376b93e811079a5e7a56e7bc639863ea55bb1))
+
+Automatically generated by python-semantic-release
 
 
 ## v0.15.2 (2024-12-05)
