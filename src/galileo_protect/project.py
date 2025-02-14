@@ -11,7 +11,7 @@ from galileo_core.schemas.core.project import (
     ProjectResponse,
     ProjectType,
 )
-from galileo_protect.schemas.config import Config
+from galileo_protect.schemas.config import ProtectConfig
 
 
 def create_project(name: str = DEFAULT_PROJECT_NAME) -> ProjectResponse:
@@ -28,10 +28,9 @@ def create_project(name: str = DEFAULT_PROJECT_NAME) -> ProjectResponse:
     ProjectResponse
         Project creation response.
     """
-    config = Config.get()
-    project = core_create_project(request=CreateProjectRequest(name=name, type=ProjectType.protect))
+    config = ProtectConfig.get()
+    project = core_create_project(request=CreateProjectRequest(name=name, type=ProjectType.protect), config=config)
     config.project_id = project.id
-    config.write()
     return project
 
 
@@ -44,7 +43,8 @@ def get_projects() -> List[ProjectResponse]:
     List[ProjectResponse]
         List of Protect projects.
     """
-    return core_get_projects(project_type=ProjectType.protect)
+    config = ProtectConfig.get()
+    return core_get_projects(project_type=ProjectType.protect, config=config)
 
 
 def get_project(
@@ -74,9 +74,11 @@ def get_project(
     ValueError
         If neither project_id nor project_name is provided.
     """
+    config = ProtectConfig.get()
     return core_get_project(
         project_id=project_id,
         project_name=project_name,
         project_type=ProjectType.protect,
         raise_if_missing=raise_if_missing,
+        config=config,
     )
