@@ -1,4 +1,5 @@
-from typing import Dict, Optional, Sequence
+from collections.abc import Sequence
+from typing import Dict, Optional
 
 from pydantic import UUID4
 
@@ -8,7 +9,7 @@ from galileo_core.schemas.protect.response import Response
 from galileo_protect.constants.invoke import TIMEOUT, TIMEOUT_MARGIN
 from galileo_protect.constants.routes import Routes
 from galileo_protect.schemas import Payload, Request, Ruleset
-from galileo_protect.schemas.config import Config
+from galileo_protect.schemas.config import ProtectConfig
 
 
 async def ainvoke(
@@ -58,7 +59,7 @@ async def ainvoke(
     Response
         Response from the Protect API.
     """
-    config = Config.get()
+    config = ProtectConfig.get()
     response_json = await config.api_client.arequest(
         RequestMethod.POST,
         Routes.invoke,

@@ -1,5 +1,6 @@
+from collections.abc import Generator
 from pathlib import Path
-from typing import Callable, Generator, List, Optional
+from typing import Callable, List, Optional
 from unittest.mock import Mock, patch
 from uuid import UUID, uuid4
 
@@ -13,7 +14,7 @@ from galileo_core.schemas.protect.response import Response, TraceMetadata
 from galileo_core.schemas.protect.rule import Rule, RuleOperator
 from galileo_core.schemas.protect.ruleset import Ruleset
 from galileo_protect.constants.routes import Routes
-from galileo_protect.schemas.config import Config
+from galileo_protect.schemas.config import ProtectConfig
 from tests.data import A_CONSOLE_URL, A_JWT_TOKEN, A_PROTECT_INPUT
 
 
@@ -52,14 +53,16 @@ def mock_healthcheck(mock_request: Mock) -> Generator[None, None, None]:
 
 
 @fixture
-def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None, mock_get_current_user: Mock) -> Callable:
+def set_validated_config(
+    tmp_home_dir: Path, mock_healthcheck: None, mock_get_current_user: Mock
+) -> Generator[Callable, None, None]:
     def curry(
         project_id: Optional[UUID] = None,
         project_name: Optional[str] = None,
         stage_id: Optional[UUID] = None,
         stage_name: Optional[str] = None,
-    ) -> Config:
-        return Config.set(
+    ) -> ProtectConfig:
+        return ProtectConfig.get(
             console_url=A_CONSOLE_URL,
             jwt_token=A_JWT_TOKEN,
             project_id=project_id,
@@ -68,7 +71,9 @@ def set_validated_config(tmp_home_dir: Path, mock_healthcheck: None, mock_get_cu
             stage_name=stage_name,
         )
 
-    return curry
+    yield curry
+    ProtectConfig.get().reset()
+    return
 
 
 @fixture

@@ -5,7 +5,7 @@ from galileo_core.constants.request_method import RequestMethod
 from galileo_core.constants.routes import Routes as CoreRoutes
 from galileo_core.schemas.core.project import ProjectType
 from galileo_protect.project import create_project, get_projects
-from galileo_protect.schemas.config import Config
+from galileo_protect.schemas.config import ProtectConfig
 from tests.data import A_PROJECT_NAME
 
 
@@ -24,7 +24,7 @@ def test_create_project(set_validated_config: Callable, mock_request: Callable) 
     assert matcher_get.called
     assert matcher_post.called
     # Verify that the project ID was set in the config.
-    config = Config.get()
+    config = ProtectConfig.get()
     assert config.project_id is not None
     assert config.project_id == project_id
 

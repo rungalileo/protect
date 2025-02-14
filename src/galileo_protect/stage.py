@@ -1,4 +1,5 @@
-from typing import Dict, Optional, Sequence
+from collections.abc import Sequence
+from typing import Dict, Optional
 
 from pydantic import UUID4
 
@@ -8,7 +9,7 @@ from galileo_core.schemas.protect.ruleset import Ruleset, RulesetsMixin
 from galileo_core.schemas.protect.stage import StageType, StageWithRulesets
 from galileo_core.utils.name import ts_name
 from galileo_protect.constants.routes import Routes
-from galileo_protect.schemas.config import Config
+from galileo_protect.schemas.config import ProtectConfig
 from galileo_protect.schemas.stage import StageResponse
 
 
@@ -48,7 +49,7 @@ def create_stage(
     ValueError
         If the project ID is not provided or found.
     """
-    config = Config.get()
+    config = ProtectConfig.get()
     project_id = project_id or config.project_id
     prioritized_rulesets = prioritized_rulesets or list()
     if project_id is None:
@@ -74,7 +75,6 @@ def create_stage(
     config.stage_id = stage.id
     config.stage_name = stage.name
     config.stage_version = stage.version
-    config.write()
     return stage
 
 
@@ -111,13 +111,13 @@ def get_stage(
     ValueError
         If the stage ID or name is not provided.
     """
-    config = Config.get()
+    config = ProtectConfig.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     stage_name = stage_name or config.stage_name
     if project_id is None:
         if project_name:
-            project = get_project_from_name(project_name=project_name, raise_if_missing=True)
+            project = get_project_from_name(project_name=project_name, raise_if_missing=True, config=config)
             assert project is not None, "Project should not be None."
             project_id = project.id
         else:
@@ -135,7 +135,6 @@ def get_stage(
     config.project_id = project_id
     config.stage_id = stage.id
     config.stage_name = stage.name
-    config.write()
     return stage
 
 
@@ -178,7 +177,7 @@ def update_stage(
     ValueError
         If the stage ID is not provided or found.
     """
-    config = Config.get()
+    config = ProtectConfig.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     stage_name = stage_name or config.stage_name
@@ -200,7 +199,6 @@ def update_stage(
     config.stage_id = stage.id
     config.stage_name = stage.name
     config.stage_version = stage.version
-    config.write()
     return stage
 
 
@@ -228,7 +226,7 @@ def pause_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = 
     ValueError
         If the stage ID is not provided or found.
     """
-    config = Config.get()
+    config = ProtectConfig.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     if project_id is None:
@@ -242,11 +240,10 @@ def pause_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = 
     )
     config.project_id = project_id
     config.stage_id = stage_id
-    config.write()
 
 
 def resume_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = None) -> None:
-    config = Config.get()
+    config = ProtectConfig.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
     if project_id is None:
@@ -260,4 +257,3 @@ def resume_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] =
     )
     config.project_id = project_id
     config.stage_id = stage_id
-    config.write()
