@@ -1,6 +1,5 @@
-from collections.abc import Generator
 from pathlib import Path
-from typing import Callable, List, Optional
+from typing import Callable, Generator, List, Optional
 from unittest.mock import Mock, patch
 from uuid import UUID, uuid4
 
