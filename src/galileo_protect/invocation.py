@@ -1,5 +1,4 @@
-from collections.abc import Sequence
-from typing import Dict, Optional
+from typing import Dict, Optional, Sequence
 
 from pydantic import UUID4
 
