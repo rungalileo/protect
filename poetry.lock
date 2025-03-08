@@ -396,13 +396,13 @@ typing = ["typing-extensions (>=4.12.2)"]
 
 [[package]]
 name = "galileo-core"
-version = "3.10.0"
+version = "3.11.0"
 description = "Shared schemas and configuration for Galileo's Python packages."
 optional = false
 python-versions = "<4.0.0,>=3.8.1"
 files = [
-    {file = "galileo_core-3.10.0-py3-none-any.whl", hash = "sha256:908792c723079cb57fe26eac6cd848c384d47444a1efee8d42eb006695714c69"},
-    {file = "galileo_core-3.10.0.tar.gz", hash = "sha256:e0ffb10a603c5bbda8c3c6e50fe019f1b1a720bb1adb2024eb4f4e6063178bd7"},
+    {file = "galileo_core-3.11.0-py3-none-any.whl", hash = "sha256:0cdad116c33fce5654aa819b9154d102f302fc654d9779cc57da39f019fafd6a"},
+    {file = "galileo_core-3.11.0.tar.gz", hash = "sha256:fcfb2c8e6e076ac8ac5d485a9bdd6d91da20e2aaaaa55cea219cb43c0faf8e21"},
 ]
 
 [package.dependencies]
@@ -1321,13 +1321,13 @@ typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
 name = "pydantic-settings"
-version = "2.7.1"
+version = "2.8.1"
 description = "Settings management using Pydantic"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pydantic_settings-2.7.1-py3-none-any.whl", hash = "sha256:590be9e6e24d06db33a4262829edef682500ef008565a969c73d39d5f8bfb3fd"},
-    {file = "pydantic_settings-2.7.1.tar.gz", hash = "sha256:10c9caad35e64bfb3c2fbf70a078c0e25cc92499782e5200747f942a065dec93"},
+    {file = "pydantic_settings-2.8.1-py3-none-any.whl", hash = "sha256:81942d5ac3d905f7f3ee1a70df5dfb62d5569c12f51a5a647defc1c3d9ee2e9c"},
+    {file = "pydantic_settings-2.8.1.tar.gz", hash = "sha256:d5c663dfbe9db9d5e1c646b2e161da12f0d734d422ee56f567d0ea2cee4e8585"},
 ]
 
 [package.dependencies]
@@ -1752,13 +1752,13 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "virtualenv"
-version = "20.29.2"
+version = "20.29.3"
 description = "Virtual Python Environment builder"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "virtualenv-20.29.2-py3-none-any.whl", hash = "sha256:febddfc3d1ea571bdb1dc0f98d7b45d24def7428214d4fb73cc486c9568cce6a"},
-    {file = "virtualenv-20.29.2.tar.gz", hash = "sha256:fdaabebf6d03b5ba83ae0a02cfe96f48a716f4fae556461d180825866f75b728"},
+    {file = "virtualenv-20.29.3-py3-none-any.whl", hash = "sha256:3e3d00f5807e83b234dfb6122bf37cfadf4be216c53a49ac059d02414f819170"},
+    {file = "virtualenv-20.29.3.tar.gz", hash = "sha256:95e39403fcf3940ac45bc717597dba16110b74506131845d9b687d5e73d947ac"},
 ]
 
 [package.dependencies]
@@ -1857,4 +1857,4 @@ langchain = ["langchain-core"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1,<3.13"
-content-hash = "45ad8c855d8ab1114687428d7f84480384d34c18ec2321525a54c24914b40dcc"
+content-hash = "4f8de9f2c7063ccd0ed5128bdd403b695f6f8556ed2f7ca0d057309232e61f43"
