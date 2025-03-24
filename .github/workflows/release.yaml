@@ -29,7 +29,7 @@ jobs:
       - name: Build Package
         if: steps.release.outputs.released == 'true'
         run: |
-          pipx install poetry==${{ vars.POETRY_VERSION }}
+          pipx install poetry==${{ vars.POETRY_V2_VERSION }}
           poetry build
 
       - name: Publish Package to PyPI
