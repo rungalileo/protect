@@ -3,6 +3,7 @@ from typing import Dict, Optional, Sequence
 from pydantic import UUID4
 
 from galileo_core.constants.request_method import RequestMethod
+from galileo_core.helpers.logger import logger
 from galileo_core.helpers.project import get_project_from_name
 from galileo_core.schemas.protect.ruleset import Ruleset, RulesetsMixin
 from galileo_core.schemas.protect.stage import StageType, StageWithRulesets
@@ -48,6 +49,7 @@ def create_stage(
     ValueError
         If the project ID is not provided or found.
     """
+    logger.debug("Creating a stage.")
     config = ProtectConfig.get()
     project_id = project_id or config.project_id
     prioritized_rulesets = prioritized_rulesets or list()
@@ -74,6 +76,7 @@ def create_stage(
     config.stage_id = stage.id
     config.stage_name = stage.name
     config.stage_version = stage.version
+    logger.debug("Stage created successfully.")
     return stage
 
 
@@ -110,6 +113,7 @@ def get_stage(
     ValueError
         If the stage ID or name is not provided.
     """
+    logger.debug("Getting a stage.")
     config = ProtectConfig.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
@@ -134,6 +138,7 @@ def get_stage(
     config.project_id = project_id
     config.stage_id = stage.id
     config.stage_name = stage.name
+    logger.debug("Stage retrieved successfully.")
     return stage
 
 
@@ -225,6 +230,7 @@ def pause_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = 
     ValueError
         If the stage ID is not provided or found.
     """
+    logger.debug("Pausing a stage.")
     config = ProtectConfig.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
@@ -239,9 +245,11 @@ def pause_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = 
     )
     config.project_id = project_id
     config.stage_id = stage_id
+    logger.debug("Stage paused successfully.")
 
 
 def resume_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] = None) -> None:
+    logger.debug("Resuming a stage.")
     config = ProtectConfig.get()
     project_id = project_id or config.project_id
     stage_id = stage_id or config.stage_id
@@ -256,3 +264,4 @@ def resume_stage(project_id: Optional[UUID4] = None, stage_id: Optional[UUID4] =
     )
     config.project_id = project_id
     config.stage_id = stage_id
+    logger.debug("Stage resumed successfully.")

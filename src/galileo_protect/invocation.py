@@ -4,6 +4,7 @@ from pydantic import UUID4
 
 from galileo_core.constants.request_method import RequestMethod
 from galileo_core.helpers.execution import async_run
+from galileo_core.helpers.logger import logger
 from galileo_core.schemas.protect.response import Response
 from galileo_protect.constants.invoke import TIMEOUT, TIMEOUT_MARGIN
 from galileo_protect.constants.routes import Routes
@@ -58,6 +59,7 @@ async def ainvoke(
     Response
         Response from the Protect API.
     """
+    logger.debug("Invoking Protect.")
     config = ProtectConfig.get()
     response_json = await config.api_client.arequest(
         RequestMethod.POST,
@@ -76,6 +78,7 @@ async def ainvoke(
         # Set the read timeout to the maximum of the timeout plus the timeout margin.
         read_timeout=timeout + TIMEOUT_MARGIN,
     )
+    logger.debug("Protect invocation completed.")
     return Response.model_validate(response_json)
 
 
