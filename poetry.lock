@@ -557,27 +557,31 @@ typing = ["typing-extensions (>=4.12.2) ; python_version < \"3.11\""]
 
 [[package]]
 name = "galileo-core"
-version = "3.18.1"
+version = "3.33.0"
 description = "Shared schemas and configuration for Galileo's Python packages."
 optional = false
-python-versions = ">=3.8.1"
+python-versions = "^3.8.1"
 groups = ["main", "test"]
-files = [
-    {file = "galileo_core-3.18.1-py3-none-any.whl", hash = "sha256:338652b85c94775f29f9ca8a3f9efbdc7aa207317a54e88a739fb02f2e61d5e0"},
-    {file = "galileo_core-3.18.1.tar.gz", hash = "sha256:86c5b1e279a9ddd24855d12a0c1b3e6b68b12eed69b1194a1d44e46efcdb5c59"},
-]
+files = []
+develop = false
 
 [package.dependencies]
 httpx = ">=0.27.0,<0.29.0"
-pydantic = ">=2.6.0,<3.0.0"
-pydantic-settings = ">=2.2.1,<3.0.0"
-pyjwt = ">=2.8.0,<3.0.0"
-pytest = {version = ">=8.2.1,<9.0.0", optional = true, markers = "extra == \"testing\""}
-respx = {version = ">=0.22.0,<0.23.0", optional = true, markers = "extra == \"testing\""}
-typing-extensions = ">=4.12.2,<5.0.0"
+pydantic = "^2.6.0"
+pydantic-settings = "^2.2.1"
+pyjwt = "^2.8.0"
+pytest = {version = "^8.2.1", optional = true}
+respx = {version = "^0.22.0", optional = true}
+typing-extensions = "^4.12.2"
 
 [package.extras]
 testing = ["pytest (>=8.2.1,<9.0.0)", "respx (>=0.22.0,<0.23.0)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/rungalileo/core.git"
+reference = "lev/hackathon-2025"
+resolved_reference = "f7da46409e3ae453230ab08a4b6e070358e8df37"
 
 [[package]]
 name = "ghp-import"
@@ -2523,4 +2527,4 @@ langchain = ["langchain-core"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.8.1"
-content-hash = "dc877a0871273523c0d870b46e762595cbbbc9db173e659e17d8f77c0d2479f3"
+content-hash = "00122fea4f3e3a3fc6e4c680e4e935bfa09ddf588bc3ca51ac8476b518fe75c6"
