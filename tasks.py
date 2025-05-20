@@ -1,7 +1,11 @@
+from platform import system
+
 from invoke.context import Context
 from invoke.tasks import task
 
-COMMON_PARAMS = dict(echo=True, pty=True)
+# Disable `pty` on Windows to avoid issues with subprocesses.
+# https://github.com/pyinvoke/invoke/issues/561
+COMMON_PARAMS = dict(echo=True, pty=not system().lower().startswith("win"))
 
 
 @task
