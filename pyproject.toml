@@ -45,7 +45,7 @@ all = ["langchain-core"]
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
-galileo-core = "^3.15.0"
+galileo-core = "^3.36.0"
 langchain-core = { version = ">=0.1.52,<0.3.0", optional = true }
 
 
