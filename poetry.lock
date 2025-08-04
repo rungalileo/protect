@@ -557,14 +557,14 @@ typing = ["typing-extensions (>=4.12.2) ; python_version < \"3.11\""]
 
 [[package]]
 name = "galileo-core"
-version = "3.36.0"
+version = "3.61.0"
 description = "Shared schemas and configuration for Galileo's Python packages."
 optional = false
 python-versions = ">=3.8.1"
 groups = ["main", "test"]
 files = [
-    {file = "galileo_core-3.36.0-py3-none-any.whl", hash = "sha256:3489b899fba8fb5534c395720d45aae4e784a0cfbadd50c33e5646b5d9b0a852"},
-    {file = "galileo_core-3.36.0.tar.gz", hash = "sha256:260c6dbbda1fbc4ecf887b13b5577484e3058aa1ce0f4cb38cbb0b37bf0d89cc"},
+    {file = "galileo_core-3.61.0-py3-none-any.whl", hash = "sha256:cda81d16a88dd3cb7dffb259d84fbded966684aa7c2047557301b169c1aa9a46"},
+    {file = "galileo_core-3.61.0.tar.gz", hash = "sha256:e50e81047f1f07297dd15627cda04936cfe6d2f9797d5c04b7254995b6d35666"},
 ]
 
 [package.dependencies]
@@ -2577,4 +2577,4 @@ langchain = ["langchain-core"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.8.1"
-content-hash = "9258279635321ee138dc8eb7741452614d36f14f419450e49611bc986a1cb74f"
+content-hash = "2e13c2ed13e48785cdc9618c1928f1d55742aa9684a72e1ce6166869be33c8e0"
