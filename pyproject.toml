@@ -1,6 +1,6 @@
 [project]
 name = "galileo-protect"
-version = "0.17.1"
+version = "1.0.0"
 description = "🛡️ Secure your Generative AI applications with Galileo Protect!"
 authors = [{ name = "Galileo Technologies Inc.", email = "team@rungalileo.io" }]
 readme = "README.md"
